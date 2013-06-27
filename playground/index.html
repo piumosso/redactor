@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title></title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.css" type="text/css" rel="stylesheet" />
+    <link href="css/bootstrap-responsive.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+    <!-- Javascripts -->
+    <script src="js/libs/require.js" data-main="js/init"></script>
+    <script>
+        require.config({
+            baseUrl: 'js',
+            paths: {
+                jquery: 'libs/jquery',
+                underscore: 'libs/underscore-amd',
+                backbone: 'libs/backbone-amd'
+            }
+        });
+    </script>
+    <script src="js/libs/bootstrap-amd.js"></script>
+</body>
+</html>
