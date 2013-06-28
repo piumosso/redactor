@@ -44,7 +44,26 @@
         document.getElementById('redactor')
     );
 
-    build.initialize({});
+    build.reset({
+        type: 'post',
+        form: {
+            title: 'Cтарая дева'
+        },
+        blocks: [
+            {
+                type: 'text',
+                content: 'Cтарая дева'
+            },
+            {
+                type: 'text',
+                content: 'Печальный памятник'
+            },
+            {
+                type: 'text',
+                content: 'Незбывшимся мечтам '
+            }
+        ]
+    });
 });</script>
     <script type="text/javascript">
         $(function(){
