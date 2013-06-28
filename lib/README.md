@@ -10,6 +10,7 @@ require(['redactor/Redactor'], function(Redactor){
 
 
 ### [Конфигурация](CONFIGURATION.md)
+### [Инициализация](INITIALIZATION.md)
 
 
 ## Как работает редактор

@@ -63,6 +63,6 @@ Redactor.config({
 
     ```javascript
     Redactor.config({
-        sync: null
+        sync: false
     });
     ```
