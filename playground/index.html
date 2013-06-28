@@ -9,21 +9,47 @@
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.css" type="text/css" rel="stylesheet" />
-    <link href="css/bootstrap-responsive.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
-    <!-- Javascripts -->
-    <script src="js/libs/require.js" data-main="js/init"></script>
+    <section class="container">
+        <h1>redactor.js</h1>
+
+        <div class="row">
+            <div class="span5" id="redactor"></div>
+            <aside class="span5 offset2">
+                <pre><code id="initialize-display"></code></pre>
+            </aside>
+        </div>
+    </section>
+
+    <!-- Vendors -->
+    <script src="../lib/vendors/require.js"></script>
+    <script src="../lib/vendors/jquery-2.0.2.js"></script>
+    <script src="../lib/vendors/underscore.js"></script>
+    <script src="../lib/vendors/backbone.js"></script>
+
+    <!-- Redactor -->
     <script>
         require.config({
-            baseUrl: 'js',
             paths: {
-                jquery: 'libs/jquery',
-                underscore: 'libs/underscore-amd',
-                backbone: 'libs/backbone-amd'
+                'redactor': '../lib'
             }
         });
     </script>
-    <script src="js/libs/bootstrap-amd.js"></script>
+    <script src="../lib/redactor.js"></script>
+
+    <!-- Initialize -->
+    <script type="text/javascript" id="initialize-script">require(['redactor/Redactor'], function(Redactor){
+    var build = new Redactor.Build(
+        document.getElementById('redactor')
+    );
+
+    build.initialize({});
+});</script>
+    <script type="text/javascript">
+        $(function(){
+            $('#initialize-display').text($('#initialize-script').text());
+        });
+    </script>
 </body>
 </html>
