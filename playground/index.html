@@ -40,6 +40,15 @@
 
     <!-- Initialize -->
     <script type="text/javascript" id="initialize-script">require(['redactor/Redactor'], function(Redactor){
+    Redactor.config({
+        blocks: ['text'],
+        buildTypes: {
+            post: {
+                blocks: ['text']
+            }
+        }
+    });
+
     var build = new Redactor.Build(
         document.getElementById('redactor')
     );
