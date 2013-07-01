@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title></title>
+    <title>redactor.js playground</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.css" type="text/css" rel="stylesheet" />
@@ -40,11 +40,17 @@
 
     <!-- Initialize -->
     <script type="text/javascript" id="initialize-script">require(['redactor/Redactor'], function(Redactor){
-    var build = new Redactor.Build(
-        document.getElementById('redactor')
-    );
+    Redactor.config({
+        blocks: ['text'],
+        buildTypes: {
+            post: {
+                blocks: ['text']
+            }
+        },
+        sync: false
+    });
 
-    build.reset({
+    var build = Redactor.load({
         type: 'post',
         form: {
             title: 'Cтарая дева'
@@ -60,12 +66,15 @@
             },
             {
                 type: 'text',
-                content: 'Незбывшимся мечтам '
+                content: 'Незбывшимся мечтам'
             }
         ]
     });
+
+    build.el = document.getElementById('redactor');
 });</script>
     <script type="text/javascript">
+        // Отображение примера кода в правой колонке
         $(function(){
             $('#initialize-display').text($('#initialize-script').text());
         });
