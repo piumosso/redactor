@@ -51,3 +51,14 @@ Redactor.config({
 В этих объектах указываются:
 
 - **blocks** — массив названий блоков, которые разрешены в этой сборке
+
+
+### templateEngine
+
+Шаблонный движок. По умолчанию используется Django-совместимый
+[Plate.js](https://github.com/chrisdickinson/plate/) ('redactor/templates/Plate').
+```javascript
+Redactor.config({
+    templateEngine: 'redactor/templates/MyTemplate'
+});
+```
