@@ -12,11 +12,11 @@ var build = new Redactor.Build({
 
 Методы:
 
-*getType* - получение типа сборки:
+**getType** - получение типа сборки:
 ```javascript
 var type = build.getType();
 ```
-*reset* - заполнение сборки блоками
+**reset** - заполнение сборки блоками
 ```javascript
 build.reset([
     {type: 'text', content: 'Cтарая дева'},
@@ -24,13 +24,13 @@ build.reset([
     {type: 'text', content: 'Незбывшимся мечтам'}
 ]);
 ```
-*add* - добавление в сборку блока в конец или на заданную позицию
+**add** - добавление в сборку блока в конец или на заданную позицию
 ```javascript
 build.add(block);
 // или
 build.add(block, 7);
 ```
-*canReceive* - проерка, может ли билд принимать блоки определённого типа
+**canReceive** - проерка, может ли билд принимать блоки определённого типа
 ```javascript
 var isAllowed = build.canReceive('text');
 ```
@@ -46,11 +46,8 @@ var block = new Redactor.blocks.Text({
 
 Методы:
 
-*getType* - получение типа блока:
+**getType** - получение типа блока:
 ```javascript
 var type = build.getType();
 ```
-
-
-## BlockCollection - коллекция блоков сборки
 
