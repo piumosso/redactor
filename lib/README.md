@@ -5,12 +5,14 @@
 require(['redactor/Redactor'], function(Redactor){
     // Конфигурация
     // Инициализация
+    // Использование
 });
 ```
 
 
 ### [Конфигурация](CONFIGURATION.md)
 ### [Инициализация](INITIALIZATION.md)
+### [Использование](USAGE.md)
 
 
 ## Как работает редактор

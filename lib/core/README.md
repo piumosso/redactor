@@ -1,16 +1,18 @@
-# Основные объекты - сущности редактора
+# Core-API редактора
 
 
 ## Build - сборка
 
-Создание сборки:
+
+### Создание сборки:
+
 ```javascript
 var build = new Redactor.Build({
     type: 'post'
 });
 ```
 
-Методы:
+### Методы:
 
 **getType** - получение типа сборки:
 ```javascript
@@ -35,19 +37,31 @@ build.add(block, 7);
 var isAllowed = build.canReceive('text');
 ```
 
+
 ## Block - блок
 
-Создание блока:
+
+### Создание блока:
+
 ```javascript
-var block = new Redactor.blocks.Text({
+var block = new Redactor.blocks.text({
     content: 'Текст'
 });
 ```
 
-Методы:
+
+### Методы:
 
 **getType** - получение типа блока:
 ```javascript
 var type = build.getType();
 ```
 
+
+## blockGetter - получение объекта блока из данных
+
+```javascript
+require('redactor/core/blockGetter', function(getBlock){
+    var block = getBlock({type: 'text', content: 'Cтарая дева'});
+});
+```
