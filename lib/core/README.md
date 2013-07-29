@@ -65,3 +65,8 @@ require('redactor/core/blockGetter', function(getBlock){
     var block = getBlock({type: 'text', content: 'Cтарая дева'});
 });
 ```
+
+
+## BlockCollection - коллекция блоков
+
+Представляет собой массив объектов блоков.
