@@ -4,9 +4,9 @@
 выполенения метода `extend` базового типа блоков `redactor/core/Block`:
 ```javascript
 define('redactor/blocks/MyBlock', [
-    'redactor/core/Block'
-], function(Block){
-    return Block.extend({
+    'redactor/core/AbstractBlock'
+], function(AbstractBlock){
+    return AbstractBlock.extend({
         defaults: {
             myField: ''
         }
