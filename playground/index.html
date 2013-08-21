@@ -31,6 +31,7 @@
     <!-- Redactor -->
     <script>
         require.config({
+            urlArgs: 'bust=' + (new Date()).getTime(),
             paths: {
                 'redactor': '../lib',
                 'plate': '../lib/vendors/plate'
