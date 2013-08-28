@@ -1,6 +1,7 @@
 # Использование редактора
 
-## Создание сборок
+
+## Создание сборки
 
 Чтобы создать сборку, надо вызвать метод `Redactor.load`, скормив ему [объект-синхронизатор](synchronizers/README.md) и
 в качестве второго параметра коллбек, принимающий билд.
@@ -12,6 +13,19 @@ Redactor.load(new Synchronizer(), function(build){}); // TODO
 Redactor.load(data, function(build){});
 ```
 
+
+## Отображение сборки
+
+Чтобы отобразить сборку нужно вызвать метод render:
+```javascript
+build.render(function($el){
+    // Здесь $el вставляем в DOM
+}};
+```
+Этот метод будет вызван автоматически при передаче DOM-элемента el в конструктор сборки (см. формат данных ниже) или
+при инициализации данными в Redactor.load
+
+
 ## Формат данных
 
 ```javascript
@@ -22,6 +36,9 @@ var data = {
     // Массив блоков
     blocks: [
         {type: 'text', content: 'Hello, world!'}
-    ]
+    ],
+
+    // DOM-элемент редактора
+    el: document.getElementById('redactor')
 }
 ```
