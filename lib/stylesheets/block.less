@@ -1,0 +1,24 @@
+// Блок
+
+@block-handler-size: 30px;
+@block-min-size: @block-handler-size;
+
+.redactor-block {
+    position: relative;
+    min-height: @block-min-size;
+
+    &__handler {
+        position: absolute;
+        top: -@block-handler-size * 0.1;
+        left: -@block-handler-size;
+        width: @block-handler-size;
+        height: @block-handler-size;
+        background: url(../images/redactor-handler.png) 0 0 no-repeat;
+        background-size: @block-handler-size @block-handler-size*2;
+        cursor: pointer;
+
+        &:hover {
+            background-position: 0 100%;
+        }
+    }
+}
