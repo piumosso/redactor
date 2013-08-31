@@ -10,11 +10,11 @@
     </thead>
     <tbody>
         <tr>
-            <th>js-redactor-block</th>
+            <td>js-redactor-block</td>
             <td>Блок</td>
         </tr>
         <tr>
-            <th>js-redactor-block-handler</th>
+            <td>js-redactor-block-handler</td>
             <td>Элемент, за который можно перетаскивать блок</td>
         </tr>
     </tbody>
