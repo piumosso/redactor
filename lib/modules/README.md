@@ -12,3 +12,16 @@ define('redactor/modules/myModule', [
 });
 
 ```
+
+
+## Инициализация модуля
+
+Чтобы добавить логику инициализации сборки или блока, надо определить метод, название которого начинается с initialize:
+```javascript
+Build.prototype.initializeMyModule = function(){
+    // ...
+};
+AbstractBlock.prototype.initializeMyModule = function(){
+    // ...
+};
+```
