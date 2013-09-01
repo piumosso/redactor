@@ -1,19 +1,14 @@
 # Модули редактора
 
 Модуль редактора модифицирует ядровые сущности, добавляя к ним функциональность.
-Представляет собой функцию, принимающую на вход класс Build и возвращающую ссылку на новый или модифицированный класс
-Build1, например:
-
 ```javascript
-define('redactor/modules/myModule', function(){
-    return function(Build){
-        var Build1;
-
-        // Логика модификации
-
-        return {
-            Build: Build1
-        }
-    }
+define('redactor/modules/myModule', [
+    'redactor/core/Build',
+    'redactor/core/AbstractBlock'
+], function(Build, AbstractBlock){
+    return function(){
+        // Действия по инициализации модуля
+    };
 });
+
 ```
