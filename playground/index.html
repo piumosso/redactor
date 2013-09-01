@@ -27,9 +27,15 @@
 
     <!-- Vendors -->
     <script src="../lib/vendors/require.js"></script>
-    <script src="../lib/vendors/jquery-2.0.2.js"></script>
+    <script src="../lib/vendors/jquery-1.7.1.js"></script>
     <script src="../lib/vendors/underscore.js"></script>
     <script src="../lib/vendors/backbone.js"></script>
+    <script src="../lib/vendors/jquery.ui/jquery.ui.core.js"></script>
+    <script src="../lib/vendors/jquery.ui/jquery.ui.widget.js"></script>
+    <script src="../lib/vendors/jquery.ui/jquery.ui.mouse.js"></script>
+    <script src="../lib/vendors/jquery.ui/jquery.ui.position.js"></script>
+    <script src="../lib/vendors/jquery.ui/jquery.ui.droppable.js"></script>
+    <script src="../lib/vendors/jquery.ui/jquery.ui.sortable.js"></script>
 
     <!-- Redactor -->
     <script>
@@ -44,7 +50,7 @@
     <script src="../lib/redactor.js"></script>
 
     <!-- Initialize -->
-    <script type="text/javascript" id="initialize-script">require(['redactor/Redactor'], function(Redactor){
+    <script id="initialize-script">require(['redactor/Redactor'], function(Redactor){
     Redactor.config({
         blocks: ['text'],
         buildTypes: {
@@ -76,7 +82,7 @@
         el: document.getElementById('redactor')
     }, function(build){});
 });</script>
-    <script type="text/javascript">
+    <script>
         // Отображение примера кода в правой колонке
         $(function(){
             $('#initialize-display').text($('#initialize-script').text());
