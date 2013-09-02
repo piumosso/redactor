@@ -6,11 +6,13 @@
 .redactor-block {
     position: relative;
     min-height: @block-min-size;
+    margin-left: -@block-handler-size;
+    padding-left: @block-handler-size;
 
     &__handler {
         position: absolute;
         top: -@block-handler-size * 0.1;
-        left: -@block-handler-size;
+        left: 0;
         width: @block-handler-size;
         height: @block-handler-size;
         background: url(../images/redactor-handler.png) 0 0 no-repeat;

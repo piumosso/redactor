@@ -41,11 +41,11 @@ Redactor.config({
 Его ключи — имена типов, а значения — объекты описания.
 ```javascript
 Redactor.config({
-    buildTypes: [
+    buildTypes: {
         post: {
             blocks: ['text', 'image']
         }
-    ]
+    }
 });
 ```
 В этих объектах указываются:
