@@ -1,16 +1,4 @@
 <section class="redactor-build">
     <div class="redactor-build__form js-form"></div>
     <div class="redactor-build__blocks js-blocks"></div>
-
-    {% if allowedBlocks %}
-        <aside class="redactor-adder js-adder">
-            <span class="redactor-adder__wrapper">
-                {% for block in allowedBlocks %}
-                    <span class="redactor-adder__item js-adder-item" data-type="{{ block }}">
-                        {{ block }}
-                    </span>
-                {% endfor %}
-            </span>
-        </aside>
-    {% endif %}
 </section>

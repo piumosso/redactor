@@ -1,0 +1,11 @@
+{% if allowedBlocks %}
+    <aside class="redactor-adder js-adder">
+        <span class="redactor-adder__wrapper">
+            {% for block in allowedBlocks %}
+                <span class="redactor-adder__item js-adder-item" data-type="{{ block }}">
+                    {{ block }}
+                </span>
+            {% endfor %}
+        </span>
+    </aside>
+{% endif %}

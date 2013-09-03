@@ -26,7 +26,3 @@ AbstractBlock.prototype.initializeMyModule = function(){
 };
 ```
 
-
-## Возможности расширения
-
-Для сборок и блоков доступен атрибут this.renderContext, являющийся дополнительным контекстом для рендеринга.
