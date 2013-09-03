@@ -43,6 +43,7 @@ Redactor.config({
 Redactor.config({
     buildTypes: {
         post: {
+            name: 'пост',
             blocks: ['text', 'image']
         }
     }
@@ -50,6 +51,7 @@ Redactor.config({
 ```
 В этих объектах указываются:
 
+- **name** — человеческое название типа сборки
 - **blocks** — массив названий блоков, которые разрешены в этой сборке
 
 

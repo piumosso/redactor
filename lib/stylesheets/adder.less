@@ -1,6 +1,49 @@
 // Добавлялка элементов
 
+@adder-title-height: 25px;
+@adder-inactive-color: #aaa;
+@adder-active-color: black;
+
 .redactor-adder {
-    &__wrapper {}
-    &__item {}
+    text-align: center;
+
+    &__wrapper {
+        position: relative;
+        display: inline-block;
+        padding-top: @adder-title-height;
+        text-align: left;
+    }
+    &__title {
+        position: absolute;
+        top: 0;
+        left: 0;
+        white-space: nowrap;
+        color: @adder-active-color;
+
+        &_type_placeholder {
+            color: @adder-inactive-color;
+        }
+    }
+    &__item {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        border: 1px solid @adder-inactive-color;
+        cursor: pointer;
+        
+        &:hover {
+            border-color: @adder-active-color;
+        }
+        
+        &_type_text {
+            font-size: 0;
+            background: url(../images/redactor-block-text-inactive.png) 50% 50% no-repeat;
+            background-size: 20px 20px;
+
+            &:hover {
+                background-image: url(../images/redactor-block-text-active.png);
+            }
+        }
+    }
 }
