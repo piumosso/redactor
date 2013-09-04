@@ -1,6 +1,23 @@
 # Создание нового типа блоков редактора
 
-Чтобы создать новый тип блоков, надо создать модуль `redactor/blocks/MyBlock`, который будет выозвращать результат
+
+## Конфигурация
+
+Обязательные параметры блока:
+```javascript
+Redactor.config({
+    blocks: {
+        mySuperBlock: {
+            verboseName: 'My SUPER block!' // Человеческое название блока
+        }
+    }
+});
+```
+
+
+## Размещение логики
+
+Чтобы создать новый тип блоков, надо создать модуль `redactor/blocks/MyBlock`, который будет возвращать результат
 выполенения метода `extend` базового типа блоков `redactor/core/Block`:
 ```javascript
 define('redactor/blocks/MyBlock', [

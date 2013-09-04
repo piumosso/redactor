@@ -19,18 +19,17 @@ Redactor.getOption('foo', 'bar');
 
 ### blocks
 
-Массив со всеми возможными блоками.
-Укажи либо название блока (как делать свои блоки, читай [тут](blocks/README.md)), либо объект с его параметрами:
+Переопределение параметров [встроенных блоков](blocks/README.md) или [кастомные блоки](blocks/CREATE.md).
 ```javascript
 Redactor.config({
-    blocks: [
-        'text',
-        'image',
-        {
-            type: 'mySuperBlock',
+    blocks: {
+        mySuperBlock: {
             // ...
+        },
+        image: {
+            uploadUrl: '...'
         }
-    ]
+    }
 });
 ```
 
