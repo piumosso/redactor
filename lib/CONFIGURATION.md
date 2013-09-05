@@ -63,3 +63,14 @@ Redactor.config({
     templateEngine: 'redactor/templates/MyTemplate'
 });
 ```
+
+
+### editable
+
+Имя модуля с классом для редактирования. По умолчанию простое редактирование через contenteditable
+('redactor/editable/ContentEditable'). Подробнее про [редактирование контента](editable/README.md).
+```javascript
+Redactor.config({
+    editable: 'redactor/editable/ContentEditable'
+});
+```

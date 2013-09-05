@@ -17,5 +17,9 @@
             <td>js-redactor-block-handler</td>
             <td>Элемент, за который можно перетаскивать блок</td>
         </tr>
+        <tr>
+            <td>js-redactor-editabler</td>
+            <td>Контейнер для текста, который редактируется через wysiwyg и сохраняется в модель блока</td>
+        </tr>
     </tbody>
 </table>
