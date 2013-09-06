@@ -7,7 +7,9 @@
 
 Чтобы в шаблоне блока указать редактируемый текст, напишите:
 ```html
-<div class="redactor-editable js-redactor-editable" data-field="content" data-placeholder="Введите текст">{{ content }}</div>
+<div class="redactor-editable js-redactor-editable" 
+     data-field="content" 
+     data-placeholder="Введите текст">{{ content }}</div>
 ```
 Здесь класс data-field содержит имя поля, которое редактируется в этом div, data-placeholder - текст,
 отображаемый, когда поле пустое.
@@ -19,6 +21,7 @@
 Redactor.config({
     editable: 'redactor/editable/MyEditable'
 });
+```
 
 
 ## Как делать свои редакторы
