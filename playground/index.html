@@ -9,6 +9,7 @@
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.css" type="text/css" rel="stylesheet" />
+    <link href="css/playground.css" type="text/css" rel="stylesheet" />
 
     <!-- Redactor -->
     <link href="../lib/stylesheets/redactor.css" type="text/css" rel="stylesheet" />
@@ -18,7 +19,13 @@
         <h1>redactor.js</h1>
 
         <div class="row">
-            <div class="span5" id="redactor"></div>
+            <div class="span5">
+                <div class="playground-redactor" id="redactor"></div>
+                <div class="playground-redactor-print">
+                    <button class="btn btn-primary" id="print">Show result</button>
+                </div>
+                <div class="well" id="result"></div>
+            </div>
             <aside class="span5 offset2">
                 <pre><code id="initialize-display"></code></pre>
             </aside>
@@ -80,7 +87,13 @@
             }
         ],
         el: document.getElementById('redactor')
-    }, function(build){});
+    }, function(build){
+        $('#print').on('click', function(){
+            build.print(function(html){
+                $('#result').html(html);
+            });
+        });
+    });
 });</script>
     <script>
         // Отображение примера кода в правой колонке

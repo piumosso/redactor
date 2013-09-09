@@ -57,6 +57,13 @@ var block = new Redactor.blocks.text({
 var type = build.getType();
 ```
 
+**isActive** - активен ли блок:
+```javascript
+if (build.isActive()) {
+    // ...
+}
+```
+
 
 ## blockGetter - получение объекта блока из данных
 
