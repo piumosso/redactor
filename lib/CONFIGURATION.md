@@ -74,3 +74,64 @@ Redactor.config({
     editable: 'redactor/editable/ContentEditable'
 });
 ```
+
+
+### modules
+
+Массив с именами модулей, которые нужно задействовать в редакторе (инициализируются с сохранением порядка).
+```javascript
+Redactor.config({
+    modules: ['sort', 'adder']
+});
+```
+
+
+### defaultBuildTemplate
+
+Строка с текстом шаблона сборки.
+```javascript
+Redactor.config({
+    defaultBuildTemplate: '...'
+});
+```
+
+
+### defaultBuildTemplateSource
+
+Строка с источником (адресом) шаблона сборки.
+```javascript
+Redactor.config({
+    defaultBuildTemplateSource: 'redactor/templates/build.html'  // Значение по умолчанию
+});
+```
+
+
+### defaultBuildPrintTemplate
+
+Строка с текстом шаблона для печати сборки.
+```javascript
+Redactor.config({
+    defaultBuildPrintTemplate: '...'
+});
+```
+
+
+### defaultBuildPrintTemplateSource
+
+Строка с источником (адресом) шаблона для печати сборки.
+```javascript
+Redactor.config({
+    defaultBuildPrintTemplateSource: 'redactor/templates/build.print.html'  // Значение по умолчанию
+});
+```
+
+
+### baseBlockTemplateSource
+
+Базовый шаблон для блока. Задаёт обёртку формы блока и содержит дополнительную разметку для всех блоков,
+необходимую, например, для работы плагинов.
+```javascript
+Redactor.config({
+    baseBlockTemplateSource:'redactor/templates/block.html'  // Значение по умолчанию
+});
+```
