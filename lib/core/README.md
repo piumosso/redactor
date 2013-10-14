@@ -64,6 +64,11 @@ if (build.isActive()) {
 }
 ```
 
+**focus** - фокус на блоке:
+```javascript
+build.focus()
+```
+
 
 ## blockGetter - получение объекта блока из данных
 

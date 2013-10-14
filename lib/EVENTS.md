@@ -41,5 +41,13 @@
             <td>render</td>
             <td>Блок нарисован и его элемент доступен в this.el</td>
         </tr>
+        <tr>
+            <td>dom-insert</td>
+            <td>Блок вставлен в DOM</td>
+        </tr>
+        <tr>
+            <td>contenteditable-watch</td>
+            <td>Инициализирован contenteditable</td>
+        </tr>
     </tbody>
 </table>
