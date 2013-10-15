@@ -37,6 +37,8 @@
     <script src="../lib/vendors/jquery-2.0.3.js"></script>
     <script src="../lib/vendors/underscore.js"></script>
     <script src="../lib/vendors/backbone.js"></script>
+    <script src="../lib/vendors/moxie.js"></script>
+    <script src="../lib/vendors/plupload.dev.js"></script>
     <script src="../lib/vendors/jquery.ui/jquery.ui.core.js"></script>
     <script src="../lib/vendors/jquery.ui/jquery.ui.widget.js"></script>
     <script src="../lib/vendors/jquery.ui/jquery.ui.mouse.js"></script>
@@ -62,9 +64,10 @@
         buildTypes: {
             post: {
                 name: 'пост',
-                blocks: ['text']
+                blocks: ['text', 'image']
             }
-        }
+        },
+        imageUploadUrl: 'upload.json'
     });
 
     Redactor.load({
