@@ -12,15 +12,15 @@
     </thead>
     <tbody>
         <tr>
-            <td>render</td>
+            <td>build.render</td>
             <td>Сборка нарисована и её элемент доступен в this.el</td>
         </tr>
         <tr>
-            <td>sort-start</td>
+            <td>build.sort.start</td>
             <td>Начало сортировки</td>
         </tr>
         <tr>
-            <td>sort-stop</td>
+            <td>build.sort.stop</td>
             <td>Конец сортировки</td>
         </tr>
     </tbody>
@@ -38,15 +38,15 @@
     </thead>
     <tbody>
         <tr>
-            <td>render</td>
+            <td>block.render</td>
             <td>Блок нарисован и его элемент доступен в this.el</td>
         </tr>
         <tr>
-            <td>dom-insert</td>
+            <td>block.dom.insert</td>
             <td>Блок вставлен в DOM</td>
         </tr>
         <tr>
-            <td>contenteditable-watch</td>
+            <td>block.contenteditable.watch</td>
             <td>Инициализирован contenteditable</td>
         </tr>
     </tbody>
