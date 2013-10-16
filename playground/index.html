@@ -33,18 +33,18 @@
     </section>
 
     <!-- Vendors -->
-    <script src="../lib/vendors/require.js"></script>
-    <script src="../lib/vendors/jquery-2.0.3.js"></script>
-    <script src="../lib/vendors/underscore.js"></script>
-    <script src="../lib/vendors/backbone.js"></script>
-    <script src="../lib/vendors/moxie.js"></script>
-    <script src="../lib/vendors/plupload.dev.js"></script>
-    <script src="../lib/vendors/jquery.ui/jquery.ui.core.js"></script>
-    <script src="../lib/vendors/jquery.ui/jquery.ui.widget.js"></script>
-    <script src="../lib/vendors/jquery.ui/jquery.ui.mouse.js"></script>
-    <script src="../lib/vendors/jquery.ui/jquery.ui.droppable.js"></script>
-    <script src="../lib/vendors/jquery.ui/jquery.ui.draggable.js"></script>
-    <script src="../lib/vendors/jquery.ui/jquery.ui.sortable.js"></script>
+    <script src="../vendors/require.js"></script>
+    <script src="../vendors/jquery-2.0.3.js"></script>
+    <script src="../vendors/underscore.js"></script>
+    <script src="../vendors/backbone.js"></script>
+    <script src="../vendors/moxie.js"></script>
+    <script src="../vendors/plupload.dev.js"></script>
+    <script src="../vendors/jquery.ui/jquery.ui.core.js"></script>
+    <script src="../vendors/jquery.ui/jquery.ui.widget.js"></script>
+    <script src="../vendors/jquery.ui/jquery.ui.mouse.js"></script>
+    <script src="../vendors/jquery.ui/jquery.ui.droppable.js"></script>
+    <script src="../vendors/jquery.ui/jquery.ui.draggable.js"></script>
+    <script src="../vendors/jquery.ui/jquery.ui.sortable.js"></script>
 
     <!-- Redactor -->
     <script>
@@ -52,7 +52,8 @@
             urlArgs: 'bust=' + (new Date()).getTime(),
             paths: {
                 'redactor': '../lib',
-                'plate': '../lib/vendors/plate'
+                'plate': '../vendors/plate',
+                'text': '../vendors/text'
             }
         });
     </script>
