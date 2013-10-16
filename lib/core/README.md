@@ -54,19 +54,25 @@ var block = new Redactor.blocks.text({
 
 **getType** - получение типа блока:
 ```javascript
-var type = build.getType();
+var type = block.getType();
 ```
-
+**getBuild** - получение сборки, к которой в данный момент принадлежит блок:
+```javascript
+var build = block.getBuild();
+```
 **isActive** - активен ли блок:
 ```javascript
-if (build.isActive()) {
+if (block.isActive()) {
     // ...
 }
 ```
-
 **focus** - фокус на блоке:
 ```javascript
-build.focus()
+block.focus()
+```
+**insertAfter** - добавление в сборку блока в после целевого
+```javascript
+block.insertAfter(existingBlock);
 ```
 
 

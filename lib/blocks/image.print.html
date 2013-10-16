@@ -1,4 +1,6 @@
-<figure>
-    <img src="{{ src }}" />
-    <figcaption>{{ caption|safe }}</figcaption>
-</figure>
+{% if src %}
+    <figure>
+        <img src="{{ src }}" />
+        <figcaption>{{ caption|safe }}</figcaption>
+    </figure>
+{% endif %}
