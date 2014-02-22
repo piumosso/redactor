@@ -1,10 +1,16 @@
 {
     "name": "redactor",
     "version": "0.1.0",
+    "main":"./lib/redactor.js",
     "dependencies": {
         "connect": "*",
         "less-middleware": "*",
         "open": "*",
+
+        "q": "1.0.x",
+        "underscore": "*",
+        "backbone": "1.1.2",
+
         "browserify": "3.24.1"
     },
     "devDependencies": {
