@@ -29,11 +29,20 @@ module.exports = function(grunt){
                 src: ['dist/<%= pkg.name %>.full.<%= pkg.version %>.js'],
                 dest: 'dist/<%= pkg.name %>.full.<%= pkg.version %>.min.js'
             }
+        },
+
+        browserify: {
+            dist: {
+                files: {
+                    'dist/redactor.js': ['lib/redactor.js']
+                }
+            }
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-browserify');
 
-    grunt.registerTask('default', ['concat', 'uglify']);
+    grunt.registerTask('default', ['browserify']);
 };
