@@ -57,7 +57,7 @@ Redactor.config({
 ### templateEngine
 
 Шаблонный движок. По умолчанию используется Django-совместимый
-[Plate.js](https://github.com/chrisdickinson/plate/) ('redactor/templates/Plate').
+[Jade.js](https://github.com/chrisdickinson/plate/) ('redactor/templates/Plate').
 ```javascript
 Redactor.config({
     templateEngine: 'redactor/templates/MyTemplate'
