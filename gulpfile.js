@@ -4,31 +4,40 @@ var uglify = require('gulp-uglify');
 var traceur = require('gulp-traceur');
 var mainBowerFiles = require('main-bower-files');
 var mocha = require('gulp-mocha');
-var noop = function() {};
+var noop = console.log;
 
 
-gulp.task('default', function() {
+gulp.task('default', ['traceur.lib', 'traceur.test']);
+
+
+gulp.task('traceur.lib', function() {
     gulp
         .src('lib/redactor.js')
-        .pipe(browserify())
-        .on('error', noop)
-        .pipe(traceur({sourceMap: true}))
-        .on('error', noop)
-        //.pipe(uglify())
-        .pipe(gulp.dest('./dist'));
+        .pipe(traceur()).on('error', noop)
+        .pipe(gulp.dest('./dist/lib'));
+});
+
+
+gulp.task('traceur.test', function() {
+    gulp
+        .src(['test/*.js'])
+        .pipe(traceur()).on('error', noop)
+        .pipe(gulp.dest('./test/build'));
 });
 
 
 gulp.task('test', function() {
     gulp
-        .src('test/*.js')
-        .pipe(mocha())
-        .on('error', noop);
+        .src('test/build/*.js')
+        .pipe(mocha({reporter: 'spec'})).on('error', noop);
 });
 
 
 gulp.task('watch', function() {
-    gulp.watch(['lib/**/*.js', 'test/*.js'], ['default', 'test']);
+    gulp.watch(
+        ['lib/**/*.js', 'test/*.js'],
+        ['traceur.lib', 'traceur.test', 'test']
+    );
 });
 
 
