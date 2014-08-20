@@ -3,15 +3,27 @@ var expect = require('expect.js');
 
 
 describe('Build', function() {
-    class TextBlock extends Redactor.BaseBlock {}
-    TextBlock.prototype.type = 'text';
+    class TextBlock extends Redactor.BaseBlock {
+        type() {
+            return 'text';
+        }
+    }
 
-    class ImageBlock extends Redactor.BaseBlock {}
-    ImageBlock.prototype.type = 'image';
+    class ImageBlock extends Redactor.BaseBlock {
+        type() {
+            return 'image';
+        }
+    }
 
-    class PostBuild extends Redactor.BaseBuild {}
-    PostBuild.prototype.type = 'post';
-    PostBuild.prototype.blockTypes = ['text'];
+    class PostBuild extends Redactor.BaseBuild {
+        type() {
+            return 'post';
+        }
+
+        blockTypes() {
+            return ['text'];
+        }
+    }
 
     describe('.push', function() {
         it('should receive allowed blocks', function() {
@@ -25,8 +37,5 @@ describe('Build', function() {
 
             expect(build.push).withArgs(new ImageBlock()).to.throwException();
         });
-    });
-
-    describe('.print', function() {
     });
 });

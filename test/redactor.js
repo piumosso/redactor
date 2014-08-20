@@ -6,8 +6,11 @@ describe('Redactor', function() {
     var redactor = new Redactor();
 
     describe('.block', function() {
-        class TextBlock extends Redactor.BaseBlock {}
-        TextBlock.prototype.type = 'text';
+        class TextBlock extends Redactor.BaseBlock {
+            type() {
+                return 'text';
+            }
+        }
 
         redactor.block(TextBlock);
 
@@ -20,12 +23,15 @@ describe('Redactor', function() {
         it('should bind block class and redactor instance', function() {
             var block = new redactor.__blocks.text({});
 
-            expect(block.redactor).to.be(redactor);
+            expect(block.redactor()).to.be(redactor);
         });
     });
     describe('.build', function() {
-        class PostBuild extends Redactor.BaseBuild {}
-        PostBuild.prototype.type = 'post';
+        class PostBuild extends Redactor.BaseBuild {
+            type() {
+                return 'post';
+            }
+        }
 
         redactor.build(PostBuild);
 
@@ -38,7 +44,7 @@ describe('Redactor', function() {
         it('should bind block class and redactor instance', function() {
             var build = new redactor.__builds.post({});
 
-            expect(build.redactor).to.be(redactor);
+            expect(build.redactor() ).to.be(redactor);
         });
     });
 });

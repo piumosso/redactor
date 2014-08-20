@@ -3,8 +3,11 @@ var expect = require('expect.js');
 
 
 describe('BlockCollection', function() {
-    class TextBlock extends Redactor.BaseBlock {}
-    TextBlock.prototype.type = 'text';
+    class TextBlock extends Redactor.BaseBlock {
+        type() {
+            return 'text';
+        }
+    }
 
     describe('.push', function() {
         it('should receive block', function() {
