@@ -3,15 +3,19 @@ var expect = require('expect.js');
 
 
 describe('BlockCollection', function() {
-    class TextBlock extends Redactor.BaseBlock {
-        type() {
+    var redactor = new Redactor();
+    var BaseBlock = redactor.getBaseBlock();
+    var BlockCollection = redactor.getBlockCollection();
+
+    class TextBlock extends BaseBlock {
+        get type() {
             return 'text';
         }
     }
 
     describe('.push', function() {
         it('should receive block', function() {
-            var collection = new Redactor.BlockCollection();
+            var collection = new BlockCollection();
             var firstBlock = new TextBlock();
 
             collection.push(firstBlock);
@@ -19,7 +23,7 @@ describe('BlockCollection', function() {
             expect(firstBlock.model.weight).to.be.equal(0);
         });
         it('should receive several blocks and add them at the end', function() {
-            var collection = new Redactor.BlockCollection();
+            var collection = new BlockCollection();
             var firstBlock = new TextBlock();
             var secondBlock = new TextBlock();
 
@@ -30,7 +34,7 @@ describe('BlockCollection', function() {
             expect(secondBlock.model.weight).to.be.equal(1);
         });
         it('should receive block and add by index', function() {
-            var collection = new Redactor.BlockCollection();
+            var collection = new BlockCollection();
             var firstBlock = new TextBlock();
             var secondBlock = new TextBlock();
 
@@ -43,7 +47,7 @@ describe('BlockCollection', function() {
 
     describe('.reset', function() {
         it('should reset block collection', function() {
-            var collection = new Redactor.BlockCollection();
+            var collection = new BlockCollection();
             var firstBlock = new TextBlock();
             var secondBlock = new TextBlock();
             var thirdBlock = new TextBlock();

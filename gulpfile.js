@@ -34,10 +34,8 @@ gulp.task('test', function() {
 
 
 gulp.task('watch', function() {
-    gulp.watch(
-        ['lib/**/*.js', 'test/*.js'],
-        ['traceur.lib', 'traceur.test', 'test']
-    );
+    gulp.watch('lib/**/*.js', ['traceur.lib', 'test']);
+    gulp.watch('test/*.js', ['traceur.test', 'test']);
 });
 
 

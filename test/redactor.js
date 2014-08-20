@@ -4,47 +4,49 @@ var expect = require('expect.js');
 
 describe('Redactor', function() {
     var redactor = new Redactor();
+    var BaseBlock = redactor.getBaseBlock();
+    var BaseBuild = redactor.getBaseBuild();
 
-    describe('.block', function() {
-        class TextBlock extends Redactor.BaseBlock {
-            type() {
+    describe('.addBlock', function() {
+        class TextBlock extends BaseBlock {
+            get type() {
                 return 'text';
             }
         }
 
-        redactor.block(TextBlock);
+        redactor.addBlock(TextBlock);
 
         it('should receive blocks', function() {
-            var redactorTextInstance = new redactor.__blocks.text({});
+            var redactorTextInstance = new (redactor.getBlock('text'))({});
             var textInstance = new TextBlock({});
 
             expect(redactorTextInstance.__proto__.__proto__).to.be(textInstance.__proto__);
         });
         it('should bind block class and redactor instance', function() {
-            var block = new redactor.__blocks.text({});
+            var block = new (redactor.getBlock('text'))({});
 
-            expect(block.redactor()).to.be(redactor);
+            expect(block.redactor).to.be(redactor);
         });
     });
-    describe('.build', function() {
-        class PostBuild extends Redactor.BaseBuild {
-            type() {
+    describe('.addBuild', function() {
+        class PostBuild extends BaseBuild {
+            get type() {
                 return 'post';
             }
         }
 
-        redactor.build(PostBuild);
+        redactor.addBuild(PostBuild);
 
         it('should receive builds', function() {
-            var redactorPostInstance = new redactor.__builds.post({});
+            var redactorPostInstance = new (redactor.getBuild('post'))({});
             var postInstance = new PostBuild({});
 
             expect(redactorPostInstance.__proto__.__proto__).to.be(postInstance.__proto__);
         });
         it('should bind block class and redactor instance', function() {
-            var build = new redactor.__builds.post({});
+            var build = new (redactor.getBuild('post'))({});
 
-            expect(build.redactor() ).to.be(redactor);
+            expect(build.redactor).to.be(redactor);
         });
     });
 });
