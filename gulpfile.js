@@ -7,7 +7,7 @@ var mocha = require('gulp-mocha');
 var noop = console.log;
 
 
-gulp.task('default', ['traceur.lib', 'traceur.test']);
+gulp.task('default', ['traceur.lib', 'traceur.test', 'test']);
 
 
 gulp.task('traceur.lib', function() {
@@ -34,8 +34,8 @@ gulp.task('test', function() {
 
 
 gulp.task('watch', function() {
-    gulp.watch('lib/**/*.js', ['traceur.lib', 'test']);
-    gulp.watch('test/*.js', ['traceur.test', 'test']);
+    gulp.watch('lib/**/*.js', ['traceur.lib', 'traceur.test', 'test']);
+    gulp.watch('test/*.js', ['traceur.lib', 'traceur.test', 'test']);
 });
 
 

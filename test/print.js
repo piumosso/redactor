@@ -49,22 +49,43 @@ describe('Printing.', function() {
 
         it('should use default template', function(done) {
             textBlock.print().then(function() {
-                expect(constructorSpy.args[constructorSpy.args.length -1][0]).to.be('TEMPLATE TEXT');
+              var lastConstructorSpyCallArg = constructorSpy.args[constructorSpy.args.length - 1][0];
+              expect(lastConstructorSpyCallArg).to.be('TEMPLATE TEXT');
                 done();
             }).fail(done);
         });
         it('should use contextual template', function(done) {
             textBlock.print('rss').then(function() {
-                expect(constructorSpy.args[constructorSpy.args.length -1][0]).to.be('TEMPLATE TEXT FOR RSS');
+              var lastConstructorSpyCallArg = constructorSpy.args[constructorSpy.args.length - 1][0];
+              expect(lastConstructorSpyCallArg).to.be('TEMPLATE TEXT FOR RSS');
                 done();
             }).fail(done);
         });
         it('should use default template if contextual template have missed', function(done) {
             textBlock.print('teaser').then(function() {
-                expect(constructorSpy.args[constructorSpy.args.length -1][0]).to.be('TEMPLATE TEXT');
+              var lastConstructorSpyCallArg = constructorSpy.args[constructorSpy.args.length - 1][0];
+              expect(lastConstructorSpyCallArg).to.be('TEMPLATE TEXT');
                 done();
             }).fail(done);
         });
-        it('should build correct context for template engine');
+        it('should build context for template engine from the model', function (done) {
+          textBlock.print().then(function() {
+            var lastRenderSpyCallArg = renderSpy.args[renderSpy.args.length - 1][0];
+            expect(lastRenderSpyCallArg).to.eql({
+              content: 'CONTENT'
+            });
+            done();
+          }).fail(done);
+        });
+      it('should build context for template engine from the model and global context', function (done) {
+        textBlock.print(null, {globalVar: 100500}).then(function() {
+          var lastRenderSpyCallArg = renderSpy.args[renderSpy.args.length - 1][0];
+          expect(lastRenderSpyCallArg).to.eql({
+            globalVar: 100500,
+            content: 'CONTENT'
+          });
+          done();
+        }).fail(done);
+      });
     });
 });
