@@ -1,6 +1,7 @@
 var Redactor = require('../build/redactor');
 var expect = require('expect.js');
 var sinon = require('sinon');
+var _ = require('underscore');
 
 
 describe('Printing.', function() {
@@ -87,5 +88,64 @@ describe('Printing.', function() {
           done();
         }).fail(done);
       });
+    });
+
+    var redactor = new Redactor();
+    var SimpleBaseBlock = redactor.getBaseBlock();
+
+    class SimpleTextBlock extends SimpleBaseBlock {
+      get type() {
+        return 'text';
+      }
+
+      get printTemplateString() {
+        return 'p= content';
+      }
+
+      get printTemplateStringRss() {
+        return '=content\nbr';
+      }
+    }
+
+    redactor.addBlock(SimpleTextBlock);
+
+    describe('BlockCollection.print', function() {
+        var collection = new (redactor.getBlockCollection())();
+
+        collection.push(new (redactor.getBlock('text'))({
+          content: '123',
+          status: 'ACTIVE'
+        }));
+        collection.push(new (redactor.getBlock('text'))({
+          content: '456',
+          status: 'INACTIVE'
+        }));
+        collection.push(new (redactor.getBlock('text'))({
+          content: '789',
+          status: 'ACTIVE'
+        }));
+
+        it('should print only active blocks', function (done) {
+          collection.print().then(function (html) {
+            expect(html).to.be('<p>123</p>\n<p>789</p>');
+            done();
+          }).fail(done);
+        });
+        it('should provide printing-context to its blocks', function (done) {
+          collection.print('rss').then(function (html) {
+            expect(html).to.be('123<br/>\n789<br/>');
+            done();
+          }).fail(done);
+        });
+        it('should filter block with filter-function', function (done) {
+          function filter(blocks) {
+            return _.filter(blocks, block => block.model.content != '789');
+          }
+
+          collection.print(null, filter).then(function (html) {
+            expect(html).to.be('<p>123</p>');
+            done();
+          }).fail(done);
+        });
     });
 });
