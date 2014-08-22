@@ -1,4 +1,4 @@
-var Redactor = require('../../dist/lib/Redactor');
+var Redactor = require('../build/redactor');
 var expect = require('expect.js');
 
 

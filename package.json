@@ -1,7 +1,7 @@
 {
     "name": "redactor",
     "version": "0.0.1",
-    "main":"./dist/redactor.js",
+    "main":"./build/redactor.js",
     "dependencies": {
         "connect": "3.1.x",
         "less-middleware": "1.0.x",

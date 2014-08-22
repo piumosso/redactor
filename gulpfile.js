@@ -14,7 +14,7 @@ gulp.task('traceur.lib', function() {
     gulp
         .src('lib/redactor.js')
         .pipe(traceur()).on('error', noop)
-        .pipe(gulp.dest('./dist/lib'));
+        .pipe(gulp.dest('./build'));
 });
 
 
@@ -22,13 +22,13 @@ gulp.task('traceur.test', function() {
     gulp
         .src(['test/*.js'])
         .pipe(traceur()).on('error', noop)
-        .pipe(gulp.dest('./test/build'));
+        .pipe(gulp.dest('./test-build'));
 });
 
 
 gulp.task('test', function() {
     gulp
-        .src('test/build/*.js')
+        .src('test-build/*.js')
         .pipe(mocha({reporter: 'spec'})).on('error', noop);
 });
 
