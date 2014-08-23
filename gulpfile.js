@@ -1,6 +1,4 @@
 var gulp = require('gulp');
-var browserify = require('gulp-browserify');
-var uglify = require('gulp-uglify');
 var traceur = require('gulp-traceur');
 var mainBowerFiles = require('main-bower-files');
 var mocha = require('gulp-mocha');
