@@ -107,9 +107,10 @@ describe('Printing.', function () {
     });
 
     var redactor = new Redactor();
-    var SimpleBaseBlock = redactor.getBaseBlock();
+    var BaseBlock = redactor.getBaseBlock();
+    var BaseBuild = redactor.getBaseBuild();
 
-    class SimpleTextBlock extends SimpleBaseBlock {
+    class TextBlock extends BaseBlock {
         get type() {
             return 'text';
         }
@@ -123,7 +124,26 @@ describe('Printing.', function () {
         }
     }
 
-    redactor.addBlock(SimpleTextBlock);
+    class PostBuild extends BaseBuild {
+        get type() {
+            return 'post';
+        }
+
+        get blockTypes() {
+            return ['text'];
+        }
+
+        get printTemplateString() {
+            return 'section!= blocksHtml';
+        }
+
+        get printTemplateStringRss() {
+            return '!= blocksHtml';
+        }
+    }
+
+    redactor.addBlock(TextBlock);
+    redactor.addBuild(PostBuild);
 
     describe('BlockCollection.print', function () {
         var collection = new (redactor.getBlockCollection())();
@@ -217,6 +237,38 @@ describe('Printing.', function () {
                     context: 'rss',
                     blocksHtml: ''
                 });
+                done();
+            }).fail(done);
+        });
+    });
+
+    describe('Real build.print', function () {
+        var build = redactor.load({
+            type: 'post',
+            blocks: [{
+                type: 'text',
+                content: '123',
+                status: 'ACTIVE'
+            }, {
+                type: 'text',
+                content: '456',
+                status: 'INACTIVE'
+            }, {
+                type: 'text',
+                content: '789',
+                status: 'ACTIVE'
+            }]
+        });
+
+        it('should print html in default context', function (done) {
+            build.print().then(function (html) {
+                expect(html).to.be('<section><p>123</p>\n<p>789</p></section>');
+                done();
+            }).fail(done);
+        });
+        it('should provide printing-context to its blocks', function (done) {
+            build.print('rss').then(function (html) {
+                expect(html).to.be('123<br/>\n789<br/>');
                 done();
             }).fail(done);
         });
