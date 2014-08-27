@@ -4,7 +4,7 @@ var sinon = require('sinon');
 var _ = require('underscore');
 
 
-describe('Printing.', function () {
+describe('Printing', function () {
     var constructorSpy = sinon.spy();
     var renderSpy = sinon.spy();
 
@@ -95,7 +95,7 @@ describe('Printing.', function () {
             }).fail(done);
         });
         it('should build context for template engine from the model and global context', function (done) {
-            textBlock.print(null, {globalVar: 100500}).then(function () {
+            textBlock.print(null, null, {globalVar: 100500}).then(function () {
                 var lastRenderSpyCallArg = renderSpy.args[renderSpy.args.length - 1][0];
                 expect(lastRenderSpyCallArg).to.eql({
                     globalVar: 100500,
@@ -108,6 +108,7 @@ describe('Printing.', function () {
 
     var redactor = new Redactor();
     var BaseBlock = redactor.getBaseBlock();
+    var BaseBuildBlock = redactor.getBaseBuildBlock();
     var BaseBuild = redactor.getBaseBuild();
 
     class TextBlock extends BaseBlock {
@@ -124,13 +125,37 @@ describe('Printing.', function () {
         }
     }
 
+    class ImageBlock extends BaseBlock {
+        get type() {
+            return 'image';
+        }
+
+        get printTemplateString() {
+            return 'img(src=source)';
+        }
+    }
+
+    class GalleryBlock extends BaseBuildBlock {
+        get type() {
+            return 'gallery';
+        }
+
+        get buildType() {
+            return 'gallery';
+        }
+
+        get printTemplateString() {
+            return '!= innerBuildHtml';
+        }
+    }
+
     class PostBuild extends BaseBuild {
         get type() {
             return 'post';
         }
 
         get blockTypes() {
-            return ['text'];
+            return ['text', 'gallery'];
         }
 
         get printTemplateString() {
@@ -142,8 +167,25 @@ describe('Printing.', function () {
         }
     }
 
+    class GalleryBuild extends BaseBuild {
+        get type() {
+            return 'gallery';
+        }
+
+        get blockTypes() {
+            return ['image'];
+        }
+
+        get printTemplateString() {
+            return '!= blocksHtml';
+        }
+    }
+
     redactor.addBlock(TextBlock);
+    redactor.addBlock(ImageBlock);
+    redactor.addBlock(GalleryBlock);
     redactor.addBuild(PostBuild);
+    redactor.addBuild(GalleryBuild);
 
     describe('BlockCollection.print', function () {
         var collection = new (redactor.getBlockCollection())();
@@ -260,6 +302,26 @@ describe('Printing.', function () {
             }]
         });
 
+        var buildWithGallery = redactor.load({
+            type: 'post',
+            blocks: [{
+                type: 'text',
+                content: '123',
+                status: 'ACTIVE'
+            }, {
+                type: 'gallery',
+                status: 'ACTIVE',
+                build: {
+                    type: 'gallery',
+                    blocks: [{
+                        type: 'image',
+                        source: '1.jpg',
+                        status: 'ACTIVE'
+                    }]
+                }
+            }]
+        });
+
         it('should print html in default context', function (done) {
             build.print().then(function (html) {
                 expect(html).to.be('<section><p>123</p>\n<p>789</p></section>');
@@ -269,6 +331,12 @@ describe('Printing.', function () {
         it('should provide printing-context to its blocks', function (done) {
             build.print('rss').then(function (html) {
                 expect(html).to.be('123<br/>\n789<br/>');
+                done();
+            }).fail(done);
+        });
+        it('should print inner builds', function (done) {
+            buildWithGallery.print().then(function (html) {
+                expect(html).to.be('<section><p>123</p>\n<img src="1.jpg"/></section>');
                 done();
             }).fail(done);
         });
