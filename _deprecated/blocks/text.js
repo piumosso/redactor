@@ -1,4 +1,4 @@
-var AbstractBlock = require('../core/AbstractBlock'),
+var AbstractBlock = require('./AbstractBlock'),
     TextBlock;
 
 

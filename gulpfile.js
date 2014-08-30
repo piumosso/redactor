@@ -23,13 +23,13 @@ gulp.task('traceur.test', function() {
     return gulp
         .src(['test/*.js'])
         .pipe(traceur()).on('error', noop)
-        .pipe(gulp.dest('./test-build'));
+        .pipe(gulp.dest('./test/build'));
 });
 
 
 gulp.task('test', function() {
     return gulp
-        .src('test-build/*.js')
+        .src('test/build/*.js')
         .pipe(mocha({reporter: 'spec'})).on('error', noop);
 });
 

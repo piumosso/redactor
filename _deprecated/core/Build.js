@@ -1,7 +1,7 @@
 var config = require('../config'),
     BlockCollection = require('./BlockCollection'),
     getBlock = require('./blockGetter'),
-    templates = require('../templates/templates'),
+    templates = require('./templates'),
     initializeMixin = require('./initialize')
     _ = require('underscore'),
     Q = require('q'),

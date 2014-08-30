@@ -1,7 +1,7 @@
 var configurationApi = require('./config'),
-    DefaultSynchronizer = require('./synchronizers/Default'),
-    Build = require('./core/Build'),
-    templates = require('./templates/templates'),
+    DefaultSynchronizer = require('././Default'),
+    Build = require('././Build'),
+    templates = require('././templates'),
     _ = require('underscore'),
     Q = require('q');
 

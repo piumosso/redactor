@@ -3,7 +3,7 @@ var adderTemplate,
     config = require('../config'),
     getBlock = require('../core/blockGetter'),
     Build = require('../core/Build'),
-    templates = require('../templates/templates'),
+    templates = require('./templates'),
     fs = require('fs'),
     adderHtml = fs.readFileSync(__dirname + '/../templates/adder.jade');
 

@@ -1,5 +1,5 @@
-var AbstractBlock = require('../core/AbstractBlock'),
-    getBlock = require('../core/blockGetter'),
+var AbstractBlock = require('./AbstractBlock'),
+    getBlock = require('./blockGetter'),
     config = require('../config'),
     ImageBlock;
 
