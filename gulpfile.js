@@ -2,12 +2,26 @@ var gulp = require('gulp');
 var traceur = require('gulp-traceur');
 var mainBowerFiles = require('main-bower-files');
 var mocha = require('gulp-mocha');
+var browserify = require('gulp-browserify');
 var runSequence = require('run-sequence');
 var noop = console.log;
 
 
 gulp.task('default', function () {
     runSequence(['traceur.lib', 'traceur.test'], 'test');
+});
+
+
+gulp.task('install', function() {
+    runSequence(['traceur.lib'], 'build');
+});
+
+
+gulp.task('build', function() {
+    return gulp
+        .src('build/redactor.js')
+        .pipe(browserify()).on('error', noop)
+        .pipe(gulp.dest('./dist'));
 });
 
 

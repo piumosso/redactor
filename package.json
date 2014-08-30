@@ -2,6 +2,9 @@
     "name": "redactor",
     "version": "0.0.1",
     "main":"./build/redactor.js",
+    "scripts": {
+        "install": "./node_modules/gulp/bin/gulp.js install"
+    },
     "dependencies": {
         "connect": "3.1.x",
         "less-middleware": "1.0.x",
