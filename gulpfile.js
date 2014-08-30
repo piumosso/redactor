@@ -13,7 +13,7 @@ gulp.task('default', function () {
 
 gulp.task('traceur.lib', function() {
     return gulp
-        .src('lib/redactor.js')
+        .src('lib/*.js')
         .pipe(traceur()).on('error', noop)
         .pipe(gulp.dest('./build'));
 });
