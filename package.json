@@ -11,7 +11,8 @@
         "open": "0.0.x",
         "q": "1.0.x",
         "underscore": "1.6.x",
-        "jade": "1.5.x"
+        "jade": "1.5.x",
+        "traceur": "0.0.x"
     },
     "devDependencies": {
         "gulp": "3.8.x",
