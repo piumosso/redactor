@@ -177,7 +177,7 @@ describe('Printing', function () {
         }
 
         get printTemplateString() {
-            return '!= blocksHtml';
+            return 'div(role=form.role)!= blocksHtml';
         }
     }
 
@@ -313,6 +313,9 @@ describe('Printing', function () {
                 status: 'ACTIVE',
                 build: {
                     type: 'gallery',
+                    form: {
+                        role: 'photos'
+                    },
                     blocks: [{
                         type: 'image',
                         source: '1.jpg',
@@ -336,7 +339,7 @@ describe('Printing', function () {
         });
         it('should print inner builds', function (done) {
             buildWithGallery.print().then(function (html) {
-                expect(html).to.be('<section><p>123</p>\n<img src="1.jpg"/></section>');
+                expect(html).to.be('<section><p>123</p>\n<div role="photos"><img src="1.jpg"/></div></section>');
                 done();
             }).fail(done);
         });
