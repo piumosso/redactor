@@ -177,7 +177,7 @@ describe('Printing', function () {
         }
 
         get printTemplateString() {
-            return 'div(role=form.role)!= blocksHtml';
+            return 'div(role=build.form.role)!= blocksHtml';
         }
     }
 
@@ -258,8 +258,11 @@ describe('Printing', function () {
                 var lastRenderSpyCallArg = renderSpy.args[renderSpy.args.length - 1][0];
                 expect(lastRenderSpyCallArg).to.eql({
                     type: 'post',
-                    form: {
-                        title: 'TITLE'
+                    build: {
+                        type: 'post',
+                        form: {
+                            title: 'TITLE'
+                        }
                     },
                     context: undefined,
                     blocksHtml: ''
@@ -273,8 +276,11 @@ describe('Printing', function () {
                 expect(lastRenderSpyCallArg).to.eql({
                     globalVar: 100500,
                     type: 'post',
-                    form: {
-                        title: 'TITLE'
+                    build: {
+                        type: 'post',
+                        form: {
+                            title: 'TITLE'
+                        }
                     },
                     context: 'rss',
                     blocksHtml: ''
