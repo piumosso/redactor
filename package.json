@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "main":"./build/redactor.js",
     "scripts": {
-        "install": "./node_modules/gulp/bin/gulp.js install"
+        "postinstall": "./node_modules/gulp/bin/gulp.js install"
     },
     "dependencies": {
         "connect": "3.1.x",
@@ -12,9 +12,7 @@
         "q": "1.0.x",
         "underscore": "1.6.x",
         "jade": "1.5.x",
-        "traceur": "0.0.53"
-    },
-    "devDependencies": {
+        "traceur": "0.0.53",
         "gulp": "3.8.x",
         "gulp-browserify": "0.5.x",
         "gulp-uglify": "0.3.x",
