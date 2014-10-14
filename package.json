@@ -1,9 +1,9 @@
 {
     "name": "redactor",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "main":"./build/redactor.js",
     "scripts": {
-        "postinstall": "./node_modules/gulp/bin/gulp.js install"
+        "postinstall": "gulp install"
     },
     "dependencies": {
         "connect": "3.1.x",
