@@ -350,4 +350,46 @@ describe('Printing', function () {
             }).fail(done);
         });
     });
+
+    describe('Real build.print with galleries', function () {
+        var build = redactor.load({
+            type: 'post',
+            blocks: [{
+                type: 'gallery',
+                status: 'ACTIVE',
+                build: {
+                    type: 'gallery',
+                    form: {
+                        role: 'ROLE1'
+                    },
+                    blocks: [{
+                        type: 'image',
+                        source: '1.jpg',
+                        status: 'ACTIVE'
+                    }]
+                }
+            }, {
+                type: 'gallery',
+                status: 'ACTIVE',
+                build: {
+                    type: 'gallery',
+                    form: {
+                        role: 'ROLE2'
+                    },
+                    blocks: [{
+                        type: 'image',
+                        source: '2.jpg',
+                        status: 'ACTIVE'
+                    }]
+                }
+            }]
+        });
+
+        it('should print them with different contexts', function (done) {
+            build.print().then(function (html) {
+                expect(html).to.be('<section><div role="ROLE1"><img src="1.jpg"/></div>\n<div role="ROLE2"><img src="2.jpg"/></div></section>');
+                done();
+            }).fail(done);
+        });
+    });
 });
