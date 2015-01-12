@@ -1,27 +1,29 @@
 {
-    "name": "redactor",
-    "version": "0.0.4",
-    "main":"./build/redactor.js",
-    "scripts": {
-        "postinstall": "gulp install"
-    },
-    "dependencies": {
-        "connect": "3.1.x",
-        "less-middleware": "1.0.x",
-        "open": "0.0.x",
-        "q": "1.0.x",
-        "underscore": "1.6.x",
-        "jade": "1.5.x",
-        "traceur": "0.0.53",
-        "gulp": "3.8.x",
-        "gulp-browserify": "0.5.x",
-        "gulp-uglify": "0.3.x",
-        "gulp-traceur": "0.11.0",
-        "gulp-mocha": "0.5.x",
-        "main-bower-files": "1.0.x",
-        "bower": "1.3.x",
-        "expect.js": "0.3.x",
-        "sinon": "1.10.x",
-        "run-sequence": "0.3.x"
-    }
+  "name": "redactor",
+  "version": "0.0.4",
+  "main": "./build/redactor.js",
+  "scripts": {
+    "postinstall": "gulp install"
+  },
+  "dependencies": {
+    "connect": "3.1.x",
+    "less-middleware": "1.0.x",
+    "open": "0.0.x",
+    "q": "1.0.x",
+    "underscore": "1.6.x",
+    "jade": "1.5.x",
+    "traceur": "0.0.53",
+    "gulp": "3.8.x",
+    "gulp-browserify": "0.5.x",
+    "gulp-uglify": "0.3.x",
+    "gulp-traceur": "0.11.0",
+    "gulp-mocha": "0.5.x",
+    "main-bower-files": "1.0.x",
+    "bower": "1.3.x",
+    "expect.js": "0.3.x",
+    "sinon": "1.10.x",
+    "run-sequence": "0.3.x",
+    "gulp-6to5": "2.x.x",
+    "gulp-rename": "1.2.x"
+  }
 }
