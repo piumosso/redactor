@@ -4,7 +4,8 @@ var mainBowerFiles = require('main-bower-files');
 var mocha = require('gulp-mocha');
 var browserify = require('gulp-browserify');
 var runSequence = require('run-sequence');
-var rename = require("gulp-rename");
+var rename = require('gulp-rename');
+var less = require('gulp-less');
 var noop = console.log;
 
 
@@ -17,9 +18,19 @@ gulp.task('install', function () {
   runSequence(['to5.lib'], 'build');
 });
 
+
 gulp.task('example', function () {
-  runSequence(['to5.lib', 'to5.example'], 'build');
+  runSequence(['to5.lib', 'to5.example'], ['build', 'stylesheet']);
 });
+
+
+gulp.task('stylesheet', function () {
+  return gulp
+    .src('stylesheets/redactor.less')
+    .pipe(less()).on('error', noop)
+    .pipe(gulp.dest('./stylesheets'));
+});
+
 
 gulp.task('build', function () {
   return gulp

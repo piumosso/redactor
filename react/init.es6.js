@@ -16,6 +16,23 @@ function getBuild () {
     get printTemplateStringRss() {
       return '=content\nbr';
     }
+
+    get formComponent() {
+      var block = this;
+
+      return React.createClass({
+        getInitialState: function() {
+          return block.model;
+        },
+        onChange: function(e) {
+          block.model.content = e.target.value;
+          this.setState({content: e.target.value});
+        },
+        render() {
+          return React.createElement('input', {onChange: this.onChange, value: block.model.content});
+        }
+      });
+    }
   }
 
   class ImageBlock extends BaseBlock {
@@ -76,3 +93,9 @@ function getBuild () {
 var build = getBuild();
 
 build.attach(document.getElementById('redactor'));
+
+document.getElementsByClassName('js-print')[0].onclick = function () {
+  build.print().then(function (html) {
+    console.info(html);
+  })
+};

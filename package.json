@@ -24,6 +24,7 @@
     "sinon": "1.10.x",
     "run-sequence": "0.3.x",
     "gulp-6to5": "2.x.x",
-    "gulp-rename": "1.2.x"
+    "gulp-rename": "1.2.x",
+    "gulp-less": "2.0.x"
   }
 }
