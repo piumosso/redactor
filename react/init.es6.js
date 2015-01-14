@@ -75,4 +75,4 @@ function getBuild () {
 
 var build = getBuild();
 
-build.show(document.getElementById('redactor'));
+build.attach(document.getElementById('redactor'));
