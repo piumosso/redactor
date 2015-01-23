@@ -3,6 +3,33 @@ function getBuild () {
   var BaseBlock = redactor.getBaseBlock();
   var BaseBuild = redactor.getBaseBuild();
 
+  var ContentEditable = React.createClass({
+    displayName: 'ContentEditable',
+    render() {
+      return React.createElement('div', {
+        onInput: this.emitChange,
+        onBlur: this.emitChange,
+        contentEditable: true,
+        dangerouslySetInnerHTML: {__html: this.props.html}
+      });
+    },
+    shouldComponentUpdate(nextProps) {
+      return nextProps.html !== this.getDOMNode().innerHTML;
+    },
+    emitChange() {
+      var html = this.getDOMNode().innerHTML;
+      if (this.props.onChange && html !== this.lastHtml) {
+
+        this.props.onChange({
+          target: {
+            value: html
+          }
+        });
+      }
+      this.lastHtml = html;
+    }
+  });
+
 
   class TextBlock extends BaseBlock {
     get type() {
@@ -17,35 +44,19 @@ function getBuild () {
       return '=content\nbr';
     }
 
-    get formComponent() {
-      var block = this;
-
+    static get formComponent() {
       return React.createClass({
         getInitialState: function() {
-          return block.model;
+          return this.props.model;
         },
         onChange: function(e) {
-          block.model.content = e.target.value;
+          this.props.model.content = e.target.value;
           this.setState({content: e.target.value});
         },
         render() {
-          return React.createElement('input', {onChange: this.onChange, value: block.model.content});
+          return React.createElement(ContentEditable, {html: this.state.content, onChange: this.onChange});
         }
       });
-    }
-  }
-
-  class ImageBlock extends BaseBlock {
-    get type() {
-      return 'image';
-    }
-
-    get printTemplateString() {
-      return 'img(src=source)';
-    }
-
-    get printTemplateString() {
-      return '!= innerBuildHtml';
     }
   }
 
@@ -55,7 +66,7 @@ function getBuild () {
     }
 
     get blockTypes() {
-      return ['text', 'gallery'];
+      return ['text'];
     }
 
     get printTemplateString() {
@@ -68,7 +79,6 @@ function getBuild () {
   }
 
   redactor.addBlock(TextBlock);
-  redactor.addBlock(ImageBlock);
   redactor.addBuild(PostBuild);
 
   return redactor.load({
@@ -80,7 +90,7 @@ function getBuild () {
     }, {
       type: 'text',
       content: '456',
-      status: 'INACTIVE'
+      status: 'ACTIVE'
     }, {
       type: 'text',
       content: '789',
@@ -90,12 +100,11 @@ function getBuild () {
 }
 
 
-var build = getBuild();
+var build = getBuild().attach(document.getElementById('redactor'));
 
-build.attach(document.getElementById('redactor'));
 
-document.getElementsByClassName('js-print')[0].onclick = function () {
+setInterval(function () {
   build.print().then(function (html) {
-    console.info(html);
+    document.getElementById('result').innerHTML = html;
   })
-};
+}, 1000);
