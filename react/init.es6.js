@@ -4,7 +4,6 @@ function getBuild () {
   var BaseBuild = redactor.getBaseBuild();
 
   var ContentEditable = React.createClass({
-    displayName: 'ContentEditable',
     render() {
       return React.createElement('div', {
         onInput: this.emitChange,
@@ -18,14 +17,15 @@ function getBuild () {
     },
     emitChange() {
       var html = this.getDOMNode().innerHTML;
-      if (this.props.onChange && html !== this.lastHtml) {
 
+      if (this.props.onChange && html !== this.lastHtml) {
         this.props.onChange({
           target: {
             value: html
           }
         });
       }
+
       this.lastHtml = html;
     }
   });

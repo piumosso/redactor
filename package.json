@@ -23,7 +23,7 @@
     "expect.js": "0.3.x",
     "sinon": "1.10.x",
     "run-sequence": "0.3.x",
-    "gulp-6to5": "2.x.x",
+    "gulp-babel": "4.0.x",
     "gulp-rename": "1.2.x",
     "gulp-less": "2.0.x",
     "sortablejs": "1.1.x"

@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-var to5 = require('gulp-6to5');
+var babel = require('gulp-babel');
 var mainBowerFiles = require('main-bower-files');
 var mocha = require('gulp-mocha');
 var browserify = require('gulp-browserify');
@@ -43,7 +43,7 @@ gulp.task('build', function () {
 gulp.task('to5.lib', function () {
   return gulp
     .src('lib/*.js')
-    .pipe(to5()).on('error', noop)
+    .pipe(babel()).on('error', noop)
     .pipe(gulp.dest('./build'));
 });
 
@@ -51,7 +51,7 @@ gulp.task('to5.lib', function () {
 gulp.task('to5.example', function () {
   return gulp
     .src('react/*.es6.js')
-    .pipe(to5()).on('error', noop)
+    .pipe(babel()).on('error', noop)
     .pipe(rename(function (path) {
       path.basename = path.basename.replace('.es6', '');
     }))
@@ -62,7 +62,7 @@ gulp.task('to5.example', function () {
 gulp.task('to5.test', function () {
   return gulp
     .src(['test/*.js'])
-    .pipe(to5()).on('error', noop)
+    .pipe(babel()).on('error', noop)
     .pipe(gulp.dest('./test/build'));
 });
 
