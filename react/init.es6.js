@@ -85,15 +85,15 @@ function getBuild () {
     type: 'post',
     blocks: [{
       type: 'text',
-      content: '123',
+      content: '1',
       status: 'ACTIVE'
     }, {
       type: 'text',
-      content: '456',
+      content: '22',
       status: 'ACTIVE'
     }, {
       type: 'text',
-      content: '789',
+      content: '333',
       status: 'ACTIVE'
     }]
   });
