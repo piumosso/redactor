@@ -6,73 +6,69 @@ var browserify = require('gulp-browserify');
 var runSequence = require('run-sequence');
 var rename = require('gulp-rename');
 var less = require('gulp-less');
+var react = require('gulp-react');
+var brfs = require('brfs');
 var noop = console.log;
 
-var reactify = require('reactify');
-var watchify = require('watchify');
-var browserify = require('browserify');
-var babelify = require('babelify');
-var browserSync = require('browser-sync');
-var source = require('vinyl-source-stream');
 
+// Common tasks
 
 gulp.task('default', function () {
-  runSequence(['to5.lib', 'to5.test'], 'test');
+  runSequence(['transform:lib', 'transform:test'], 'test');
 });
-
-
 gulp.task('install', function () {
-  runSequence(['to5.lib'], 'build');
+  runSequence(['transform:lib'], 'build:lib');
 });
-
-
 gulp.task('example', function () {
-  runSequence(['to5.lib', 'to5.example'], ['build', 'stylesheet']);
+  runSequence('install', 'transform:example');
 });
 
 
-gulp.task('stylesheet', function () {
+// Build
+
+gulp.task('build', ['build:stylesheet', 'build:lib']);
+gulp.task('build:stylesheet', function () {
   return gulp
     .src('stylesheets/redactor.less')
     .pipe(less()).on('error', noop)
     .pipe(gulp.dest('./stylesheets'));
 });
-
-
-gulp.task('build', function () {
+gulp.task('build:lib', function () {
   return gulp
     .src('build/redactor.js')
-    .pipe(browserify({transform: ['brfs']})).on('error', noop)
+    .pipe(browserify({transform: [brfs]})).on('error', noop)
     .pipe(gulp.dest('./dist'));
 });
 
 
-gulp.task('to5.lib', function () {
+// Transform
+
+gulp.task('transform', ['transform:lib', 'transform:test', 'transform:example']);
+gulp.task('transform:lib', function () {
   return gulp
     .src('lib/*.js')
+    .pipe(react())
     .pipe(babel()).on('error', noop)
     .pipe(gulp.dest('./build'));
 });
-
-
-gulp.task('to5.example', function () {
+gulp.task('transform:test', function () {
   return gulp
-    .src('react/*.es6.js')
+    .src(['test/*.js'])
+    .pipe(react())
     .pipe(babel()).on('error', noop)
-    .pipe(rename(function (path) {
-      path.basename = path.basename.replace('.es6', '');
-    }))
+    .pipe(gulp.dest('./test/build'));
+});
+gulp.task('transform:example', function () {
+  return gulp
+    .src('react/init.source.js')
+    .pipe(react())
+    .pipe(babel()).on('error', noop)
+    .pipe(rename('init.js'))
     .pipe(gulp.dest('./react'));
 });
 
 
-gulp.task('to5.test', function () {
-  return gulp
-    .src(['test/*.js'])
-    .pipe(babel()).on('error', noop)
-    .pipe(gulp.dest('./test/build'));
-});
-
+// Tests
 
 gulp.task('test', function () {
   return gulp
@@ -81,34 +77,18 @@ gulp.task('test', function () {
 });
 
 
+// Watch
+
 gulp.task('watch', function () {
   gulp.watch('lib/**/*.js', ['default']);
   gulp.watch('test/*.js', ['default']);
 });
 
 
+// Bower
+
 gulp.task('bower', function () {
   return gulp
     .src(mainBowerFiles())
     .pipe(gulp.dest('./vendors'))
-});
-
-
-gulp.task('compile:lib', function () {
-  var bundler;
-
-  bundler = watchify(browserify('lib/*.js', watchify.args));
-  bundler.transform(reactify);
-  bundler.transform(babelify);
-  bundler.on('update', bundle);
-
-  return bundler.bundle()
-    .on('error', function (err) {
-      gutil.log(err.message);
-      browserSync.notify("Browserify Error!");
-      this.emit("end");
-    })
-    .pipe(source('bundle.js'))
-    .pipe(gulp.dest('.build'))
-    .pipe(browserSync.reload({stream: true, once: true}));
 });

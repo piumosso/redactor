@@ -3,33 +3,6 @@ function getBuild () {
   var BaseBlock = redactor.getBaseBlock();
   var BaseBuild = redactor.getBaseBuild();
 
-  var ContentEditable = React.createClass({
-    render() {
-      return React.createElement('div', {
-        onInput: this.emitChange,
-        onBlur: this.emitChange,
-        contentEditable: true,
-        dangerouslySetInnerHTML: {__html: this.props.html}
-      });
-    },
-    shouldComponentUpdate(nextProps) {
-      return nextProps.html !== this.getDOMNode().innerHTML;
-    },
-    emitChange() {
-      var html = this.getDOMNode().innerHTML;
-
-      if (this.props.onChange && html !== this.lastHtml) {
-        this.props.onChange({
-          target: {
-            value: html
-          }
-        });
-      }
-
-      this.lastHtml = html;
-    }
-  });
-
 
   class TextBlock extends BaseBlock {
     get type() {
@@ -44,19 +17,12 @@ function getBuild () {
       return '=content\nbr';
     }
 
-    static get formComponent() {
-      return React.createClass({
-        getInitialState: function() {
-          return this.props.model;
-        },
-        onChange: function(e) {
-          this.props.model.content = e.target.value;
-          this.setState({content: e.target.value});
-        },
+    static get form() {
+      return {
         render() {
-          return React.createElement(ContentEditable, {html: this.state.content, onChange: this.onChange});
+          return <Redactor.components.ContentEditable model={this.props.model} property="content" />;
         }
-      });
+      };
     }
   }
 
