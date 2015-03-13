@@ -8,6 +8,13 @@ var rename = require('gulp-rename');
 var less = require('gulp-less');
 var noop = console.log;
 
+var reactify = require('reactify');
+var watchify = require('watchify');
+var browserify = require('browserify');
+var babelify = require('babelify');
+var browserSync = require('browser-sync');
+var source = require('vinyl-source-stream');
+
 
 gulp.task('default', function () {
   runSequence(['to5.lib', 'to5.test'], 'test');
@@ -84,4 +91,24 @@ gulp.task('bower', function () {
   return gulp
     .src(mainBowerFiles())
     .pipe(gulp.dest('./vendors'))
+});
+
+
+gulp.task('compile:lib', function () {
+  var bundler;
+
+  bundler = watchify(browserify('lib/*.js', watchify.args));
+  bundler.transform(reactify);
+  bundler.transform(babelify);
+  bundler.on('update', bundle);
+
+  return bundler.bundle()
+    .on('error', function (err) {
+      gutil.log(err.message);
+      browserSync.notify("Browserify Error!");
+      this.emit("end");
+    })
+    .pipe(source('bundle.js'))
+    .pipe(gulp.dest('.build'))
+    .pipe(browserSync.reload({stream: true, once: true}));
 });
