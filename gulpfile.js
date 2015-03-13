@@ -19,8 +19,8 @@ gulp.task('default', function () {
 gulp.task('install', function () {
   runSequence(['transform:lib'], 'build:lib');
 });
-gulp.task('example', function () {
-  runSequence('install', 'transform:example');
+gulp.task('demo', function () {
+  runSequence(['install', 'transform:demo', 'build:demo:stylesheet']);
 });
 
 
@@ -39,11 +39,17 @@ gulp.task('build:lib', function () {
     .pipe(browserify({transform: [brfs]})).on('error', noop)
     .pipe(gulp.dest('./dist'));
 });
+gulp.task('build:demo:stylesheet', function () {
+  return gulp
+    .src('demo/demo.less')
+    .pipe(less()).on('error', noop)
+    .pipe(gulp.dest('./demo'));
+});
 
 
 // Transform
 
-gulp.task('transform', ['transform:lib', 'transform:test', 'transform:example']);
+gulp.task('transform', ['transform:lib', 'transform:test', 'transform:demo']);
 gulp.task('transform:lib', function () {
   return gulp
     .src('lib/*.js')
@@ -58,13 +64,13 @@ gulp.task('transform:test', function () {
     .pipe(babel()).on('error', noop)
     .pipe(gulp.dest('./test/build'));
 });
-gulp.task('transform:example', function () {
+gulp.task('transform:demo', function () {
   return gulp
-    .src('react/init.source.js')
+    .src('demo/demo.source.js')
     .pipe(react())
     .pipe(babel()).on('error', noop)
-    .pipe(rename('init.js'))
-    .pipe(gulp.dest('./react'));
+    .pipe(rename('demo.js'))
+    .pipe(gulp.dest('./demo'));
 });
 
 

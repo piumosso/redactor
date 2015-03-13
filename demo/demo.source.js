@@ -9,18 +9,32 @@ function getBuild () {
       return 'text';
     }
 
-    get printTemplateString() {
-      return 'p= content';
+    static get form() {
+      return {
+        render() {
+          return <p>
+            <Redactor.components.ContentEditable model={this.props.model} property="content" />
+          </p>;
+        }
+      };
     }
+  }
 
-    get printTemplateStringRss() {
-      return '=content\nbr';
+  class ListBlock extends BaseBlock {
+    get type() {
+      return 'list';
     }
 
     static get form() {
       return {
         render() {
-          return <Redactor.components.ContentEditable model={this.props.model} property="content" />;
+          return <ul>{
+            this.props.model.items.map(function(item, key) {
+              <li key={key}>
+                <Redactor.components.ContentEditable model={this.props.items} property={key} />
+              </li>
+            })
+          }</ul>;
         }
       };
     }
@@ -32,45 +46,38 @@ function getBuild () {
     }
 
     get blockTypes() {
-      return ['text'];
-    }
-
-    get printTemplateString() {
-      return 'section!= blocksHtml';
-    }
-
-    get printTemplateStringRss() {
-      return '!= blocksHtml';
+      return ['text', 'list'];
     }
   }
 
   redactor.addBlock(TextBlock);
+  redactor.addBlock(ListBlock);
   redactor.addBuild(PostBuild);
 
   return redactor.load({
     type: 'post',
     blocks: [{
       type: 'text',
-      content: '1',
+      content: 'Redactor.js — фреймворк, с помощью которого можно постоить форму редактирования материалов для вашего сайта. Материал строится из блоков, стандартных и определяемых вами.',
       status: 'ACTIVE'
     }, {
       type: 'text',
-      content: '22',
+      content: 'Что можно сделать с помощью этого фреймворка?',
+      status: 'ACTIVE'
+    }, {
+    }, {
+      type: 'list',
+      items: [
+        'Определить, как выглядит блок при редактировании', 'определить его отображение при «печати»', 'определить разные отображения при печати', 'описать логику ограничения использования блоков.'
+      ],
       status: 'ACTIVE'
     }, {
       type: 'text',
-      content: '333',
+      content: 'Под капотом Redactor.js приложение React, код на EcmaScript 6, покрытый тестами на mocha, собираемый c помощью Gulp.',
       status: 'ACTIVE'
     }]
   });
 }
 
 
-var build = getBuild().attach(document.getElementById('redactor'));
-
-
-setInterval(function () {
-  build.print().then(function (html) {
-    document.getElementById('result').innerHTML = html;
-  })
-}, 1000);
+var build = getBuild().attach(document.getElementById('example1'));
