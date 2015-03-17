@@ -1,24 +1,71 @@
-.demo {
-  font-size: 10px;
-  font-family: "Ubuntu Condensed", Helvetica, Arial, sans-serif;
+html,
+body {
+  height: 100%;
+}
+body {
+  background: url(http://upload.wikimedia.org/wikipedia/commons/d/d0/The_New_York_Times_newsroom_1942.jpg) 50% 50% / cover no-repeat fixed;
 }
 
 
-.demo-about {
-  padding: 7em 0;
-  text-align: center;
-  background: linear-gradient(to bottom right, #076187 0%, #0d47a1 50%, #2932bf 100%);
-  color: white;
+// Demo wrapper
+
+.demo {
+  height: 100%;
+  font-size: 10px;
+  font-family: "Roboto Slab", serif;
+}
+
+
+// First block
+
+.demo-intro {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  box-sizing: border-box;
+  border: solid white;
+  border-width: 2px 2px 5px;
+  background: linear-gradient(to bottom, fade(#353c40, 75%), fade(#403531, 75%));
+
+  &:before {
+    content: "";
+    position: absolute;
+    left: -15px;
+    bottom: 0;
+    width: 50%;
+    border-right: 15px solid transparent;
+    border-bottom: 15px solid white;
+  }
+  &:after {
+    content: "";
+    position: absolute;
+    right: -15px;
+    bottom: 0;
+    width: 50%;
+    border-left: 15px solid transparent;
+    border-bottom: 15px solid white;
+  }
 
   &__name {
-    margin: 0 0 0.3em;
-    font-size: 5em;
+    text-align: center;
+    color: white;
+  }
+  &__logo {
+    position: relative;
+    height: 14em;
+    background: url(../images/logo.svg) 50% 50% / contain no-repeat;
   }
   &__description {
+    margin: -1.3em 0 0 -7.2em;
     font-size: 1.8em;
   }
 }
 
+
+// Example wrapper
 
 .demo-example {
   padding: 3em 0;
@@ -40,6 +87,7 @@
   &__header {
     margin: 0 0 0.8em;
     font-size: 3.2em;
+    font-weight: normal;
   }
   &__redactor {
     max-width: 750px;
