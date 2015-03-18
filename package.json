@@ -26,6 +26,7 @@
     "gulp-less": "*",
     "sortablejs": "*",
     "gulp-react": "*",
-    "brfs": "1.4.x"
+    "brfs": "1.4.x",
+    "react": "*"
   }
 }

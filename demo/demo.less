@@ -3,7 +3,7 @@ body {
   height: 100%;
 }
 body {
-  background: url(http://upload.wikimedia.org/wikipedia/commons/d/d0/The_New_York_Times_newsroom_1942.jpg) 50% 50% / cover no-repeat fixed;
+  background: url(https://s3-eu-west-1.amazonaws.com/piumosso.ru/typewritter.jpg) 0  50% / cover no-repeat fixed;
 }
 
 
@@ -28,7 +28,6 @@ body {
   box-sizing: border-box;
   border: solid white;
   border-width: 2px 2px 5px;
-  background: linear-gradient(to bottom, fade(#353c40, 75%), fade(#403531, 75%));
 
   &:before {
     content: "";
@@ -50,17 +49,43 @@ body {
   }
 
   &__name {
+    position: relative;
+    top: -5em;
     text-align: center;
-    color: white;
+    width: 60%;
+    min-width: 800px;
   }
   &__logo {
     position: relative;
+    display: inline-block;
+    width: 55em;
     height: 14em;
     background: url(../images/logo.svg) 50% 50% / contain no-repeat;
+    color: white;
   }
   &__description {
-    margin: -1.3em 0 0 -7.2em;
+    position: absolute;
+    bottom: 0;
+    left: 0.4em;
     font-size: 1.8em;
+  }
+  &__links {
+    position: absolute;
+    bottom: 2em;
+    left: 0;
+    right: 0;
+    text-align: center;
+  }
+  &__link {
+    display: inline-block;
+    margin: 0 1em;
+    padding: 0 1em;
+    text-transform: uppercase;
+    line-height: 2em;
+    font-size: 2em;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
   }
 }
 
