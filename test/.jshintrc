@@ -1,0 +1,9 @@
+{
+  "esnext": true,
+  "globals": {
+    "module": true,
+    "exports": true,
+    "describe": true,
+    "it": true
+  }
+}
