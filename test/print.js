@@ -122,7 +122,7 @@ describe('Printing', function () {
     }
 
     static getPrintTemplateRss() {
-      return <p>{this.props.content}</p>;
+      return <div>{this.props.content}</div>;
     }
   }
 
@@ -132,7 +132,7 @@ describe('Printing', function () {
     }
 
     static getPrintTemplate() {
-      return <img src="this.props.source" />;
+      return <img src={this.props.source} />;
     }
   }
 
@@ -146,7 +146,7 @@ describe('Printing', function () {
     }
 
     static getPrintTemplate() {
-      return <div>{this.props.innerBuildHtml}</div>;
+      return <div dangerouslySetInnerHTML={{__html: this.props.innerBuildHtml}} />;
     }
   }
 
@@ -160,11 +160,11 @@ describe('Printing', function () {
     }
 
     static getPrintTemplate() {
-      return <section>{this.props.blocksHtml}</section>;
+      return <section dangerouslySetInnerHTML={{__html: this.props.blocksHtml}} />;
     }
 
     static getPrintTemplateRss() {
-      return <section>{this.props.blocksHtml}</section>;
+      return <div dangerouslySetInnerHTML={{__html: this.props.blocksHtml}} />;
     }
   }
 
@@ -178,7 +178,7 @@ describe('Printing', function () {
     }
 
     static getPrintTemplate() {
-      return <div role="this.props.build.form.role">{this.props.blocksHtml}</div>;
+      return <div dangerouslySetInnerHTML={{__html: this.props.blocksHtml}} role={this.props.build.form.role} />;
     }
   }
 
@@ -212,7 +212,7 @@ describe('Printing', function () {
     });
     it('should provide printing-context to its blocks', function (done) {
       collection.print('rss').then(function (html) {
-        expect(html).to.be('123<br/>\n789<br/>');
+        expect(html).to.be('<div>123</div>\n<div>789</div>');
         done();
       }).fail(done);
     });
@@ -340,13 +340,13 @@ describe('Printing', function () {
     });
     it('should provide printing-context to its blocks', function (done) {
       build.print('rss').then(function (html) {
-        expect(html).to.be('123<br/>\n789<br/>');
+        expect(html).to.be('<div><div>123</div>\n<div>789</div></div>');
         done();
       }).fail(done);
     });
     it('should print inner builds', function (done) {
       buildWithGallery.print().then(function (html) {
-        expect(html).to.be('<section><p>123</p>\n<div role="photos"><img src="1.jpg"/></div></section>');
+        expect(html).to.be('<section><p>123</p>\n<div><div role="photos"><img src="1.jpg"></div></div></section>');
         done();
       }).fail(done);
     });
@@ -388,7 +388,7 @@ describe('Printing', function () {
 
     it('should print them with different contexts', function (done) {
       build.print().then(function (html) {
-        expect(html).to.be('<section><div role="ROLE1"><img src="1.jpg"/></div>\n<div role="ROLE2"><img src="2.jpg"/></div></section>');
+        expect(html).to.be('<section><div><div role="ROLE1"><img src="1.jpg"></div></div>\n<div><div role="ROLE2"><img src="2.jpg"></div></div></section>');
         done();
       }).fail(done);
     });
