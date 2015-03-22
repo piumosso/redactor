@@ -12,7 +12,6 @@ body {
 .demo {
   height: 100%;
   font-size: 10px;
-  font-family: "Roboto Slab", serif;
 }
 
 
@@ -94,6 +93,7 @@ body {
 
 .demo-example {
   padding: 3em 0;
+  line-height: 2.6em;
 
   &_style_0 {
     background: white;
@@ -109,20 +109,41 @@ body {
     padding: 0 50px;
     max-width: 1200px;
   }
-  &__header {
-    margin: 0 0 0.8em;
-    font-size: 3.2em;
-    font-weight: normal;
-  }
   &__redactor {
     max-width: 750px;
   }
 
-  p {
+  h2 {
+    margin: 0;
+    padding-bottom: 0.8em;
+    font-size: 3.2em;
+    font-weight: normal;
+  }
+  p, ul, ol {
     font-size: 1.8em;
 
     span[contenteditable] {
       display: block;
     }
+  }
+  ul, ol {
+    margin: 0;
+    padding: 0;
+  }
+  p, li {
+    margin: 0;
+    padding: 0 0 1em;
+  }
+  li {
+    padding-left: 1.5em;
+  }
+  ul {
+    list-style: none;
+  }
+  ul li:before {
+    content: "—";
+    width: 1.5em;
+    margin-left: -1.5em;
+    float: left;
   }
 }

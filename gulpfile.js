@@ -12,32 +12,33 @@ var noop = console.log;
 
 
 // Common tasks
-
 gulp.task('default', function () {
-  runSequence(['transform:lib', 'transform:test'], 'test');
+  runSequence('build', 'demo', 'test');
 });
-gulp.task('install', function () {
+gulp.task('build', function () {
   runSequence(['transform:lib'], 'build:lib');
 });
+gulp.task('test', function () {
+  runSequence(['build', 'transform:test'], 'test');
+});
 gulp.task('demo', function () {
-  runSequence(['install', 'transform:demo', 'build:demo:stylesheet']);
+  runSequence('build', 'transform:demo');
 });
 
 
 // Build
 
-gulp.task('build', ['build:stylesheet', 'build:lib']);
-gulp.task('build:stylesheet', function () {
-  return gulp
-    .src('stylesheets/redactor.less')
-    .pipe(less()).on('error', noop)
-    .pipe(gulp.dest('./stylesheets'));
-});
 gulp.task('build:lib', function () {
   return gulp
     .src('build/redactor.js')
     .pipe(browserify({transform: [brfs]})).on('error', noop)
     .pipe(gulp.dest('./dist'));
+});
+gulp.task('build:stylesheet', function () {
+  return gulp
+    .src('stylesheets/redactor.less')
+    .pipe(less()).on('error', noop)
+    .pipe(gulp.dest('./stylesheets'));
 });
 gulp.task('build:demo:stylesheet', function () {
   return gulp
@@ -49,25 +50,24 @@ gulp.task('build:demo:stylesheet', function () {
 
 // Transform
 
-gulp.task('transform', ['transform:lib', 'transform:test', 'transform:demo']);
 gulp.task('transform:lib', function () {
   return gulp
     .src('lib/*.js')
-    .pipe(react())
+    .pipe(react()).on('error', noop)
     .pipe(babel()).on('error', noop)
     .pipe(gulp.dest('./build'));
 });
 gulp.task('transform:test', function () {
   return gulp
     .src(['test/*.js'])
-    .pipe(react())
+    .pipe(react()).on('error', noop)
     .pipe(babel()).on('error', noop)
     .pipe(gulp.dest('./test/build'));
 });
 gulp.task('transform:demo', function () {
   return gulp
     .src('demo/demo.source.js')
-    .pipe(react())
+    .pipe(react()).on('error', noop)
     .pipe(babel()).on('error', noop)
     .pipe(rename('demo.js'))
     .pipe(gulp.dest('./demo'));
@@ -86,8 +86,11 @@ gulp.task('test', function () {
 // Watch
 
 gulp.task('watch', function () {
-  gulp.watch('lib/**/*.js', ['default']);
-  gulp.watch('test/*.js', ['default']);
+  gulp.watch('lib/*.js', ['build', 'test']);
+  gulp.watch('test/*.js', ['test']);
+  gulp.watch('demo/*.js', ['transform:demo']);
+  gulp.watch('demo/*.less', ['build:demo:stylesheet']);
+  gulp.watch('stylesheets/*.less', ['build:stylesheet']);
 });
 
 
