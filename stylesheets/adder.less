@@ -1,49 +1,60 @@
 // Добавлялка элементов
 
 @adder-title-height: 25px;
-@adder-inactive-color: #aaa;
-@adder-active-color: black;
+@adder-inactive-opacity: 0.5;
 
 .redactor-adder {
+  text-align: center;
+
+  &__wrapper {
+    position: relative;
+    display: inline-block;
+    padding-top: @adder-title-height;
+    text-align: left;
+  }
+  &__item {
+    display: inline-block;
+    margin-right: 2px;
+    vertical-align: top;
+  }
+  &__item-icon {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    overflow: hidden;
     text-align: center;
+    font-size: 15px;
+    border: 3px solid;
+    opacity: @adder-inactive-opacity;
+    cursor: pointer;
 
-    &__wrapper {
-        position: relative;
-        display: inline-block;
-        padding-top: @adder-title-height;
-        text-align: left;
+    &:hover {
+      opacity: 1;
     }
-    &__title {
-        position: absolute;
-        top: 0;
-        left: 0;
-        white-space: nowrap;
-        color: @adder-active-color;
+  }
+  &__item_type_text &__item-icon {
+    font-size: 0;
+    background: url(../images/text.svg) 50% 50%no-repeat;
+    background-size: 30px;
+  }
+  &__item_type_image &__item-icon {
+    font-size: 0;
+    background: url(../images/image.svg) 50% 50% no-repeat;
+    background-size: 30px;
+  }
+  &__title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    white-space: nowrap;
+    font-size: 1.4em;
 
-        &_type_placeholder {
-            color: @adder-inactive-color;
-        }
+    &_type_placeholder {
+      opacity: @adder-inactive-opacity;
     }
-    &__item {
-        display: inline-block;
-        width: 30px;
-        height: 30px;
-        text-align: center;
-        border: 1px solid @adder-inactive-color;
-        cursor: pointer;
-        
-        &:hover {
-            border-color: @adder-active-color;
-        }
-        
-        &_type_text {
-            font-size: 0;
-            background: url(../images/redactor-block-text-inactive.png) 50% 50% no-repeat;
-            background-size: 20px 20px;
-
-            &:hover {
-                background-image: url(../images/redactor-block-text-active.png);
-            }
-        }
-    }
+  }
+  &__item:hover &__title {
+    display: block;
+  }
 }

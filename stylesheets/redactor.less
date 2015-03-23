@@ -3,3 +3,11 @@
 @import "adder";
 @import "editable";
 @import "media";
+
+
+.redactor-contenteditable {
+  &:empty:before {
+    content: '…';
+    opacity: 0.5;
+  }
+}
