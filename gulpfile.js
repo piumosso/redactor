@@ -22,7 +22,7 @@ gulp.task('test', function () {
   runSequence(['build', 'transform:test'], 'test');
 });
 gulp.task('demo', function () {
-  runSequence('build', 'transform:demo');
+  runSequence('build', 'transform:demo', 'stylesheet:demo');
 });
 
 
@@ -34,13 +34,13 @@ gulp.task('build:lib', function () {
     .pipe(browserify({transform: [brfs]})).on('error', noop)
     .pipe(gulp.dest('./dist'));
 });
-gulp.task('build:stylesheet', function () {
+gulp.task('stylesheet:lib', function () {
   return gulp
     .src('stylesheets/redactor.less')
     .pipe(less()).on('error', noop)
     .pipe(gulp.dest('./stylesheets'));
 });
-gulp.task('build:demo:stylesheet', function () {
+gulp.task('stylesheet:demo', function () {
   return gulp
     .src('demo/demo.less')
     .pipe(less()).on('error', noop)
@@ -89,8 +89,8 @@ gulp.task('watch', function () {
   gulp.watch('lib/*.js', ['build', 'test']);
   gulp.watch('test/*.js', ['test']);
   gulp.watch('demo/*.js', ['transform:demo']);
-  gulp.watch('demo/*.less', ['build:demo:stylesheet']);
-  gulp.watch('stylesheets/*.less', ['build:stylesheet']);
+  gulp.watch('demo/*.less', ['stylesheet:demo']);
+  gulp.watch('stylesheets/*.less', ['stylesheet:lib']);
 });
 
 
@@ -99,5 +99,5 @@ gulp.task('watch', function () {
 gulp.task('bower', function () {
   return gulp
     .src(mainBowerFiles())
-    .pipe(gulp.dest('./vendors'))
+    .pipe(gulp.dest('./vendors'));
 });

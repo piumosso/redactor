@@ -1,3 +1,10 @@
+@font-face {
+  font-family: "Signify";
+  src: url("fonts/signify.woff") format("woff"),
+  url("fonts/signify.ttf") format("truetype");
+}
+
+
 html,
 body {
   height: 100%;
@@ -58,16 +65,22 @@ body {
   &__logo {
     position: relative;
     display: inline-block;
-    width: 57em;
     height: 15em;
-    background: url(../images/logo.svg) 50% 50% / contain no-repeat;
     color: white;
+    text-align: center;
+  }
+  &__logo-text {
+    font-family: Signify;
+    letter-spacing: -0.25em;
+    font-size: 8em;
+    text-shadow: 2px 2px 1px fade(black, 50%);
   }
   &__description {
     position: absolute;
     bottom: 0.2em;
-    left: 0.9em;
-    font-size: 1.8em;
+    left: 1em;
+    font-size: 1.7em;
+    right: 0;
   }
   &__links {
     position: absolute;
@@ -86,6 +99,7 @@ body {
     font-weight: bold;
     text-decoration: none;
     color: white;
+    text-shadow: 2px 2px 1px fade(black, 50%);
   }
 }
 
