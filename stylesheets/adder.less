@@ -4,7 +4,14 @@
 @adder-inactive-opacity: 0.5;
 
 .redactor-adder {
+  position: absolute;
+  left: 100%;
+  display: none;
   text-align: center;
+
+  &_visible {
+    display: block;
+  }
 
   &__wrapper {
     position: relative;
