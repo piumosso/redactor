@@ -1,6 +1,7 @@
 // Блок
 
 @block-handler-size: 30px;
+@adder-area-size: 300px;
 @block-min-size: @block-handler-size;
 
 .redactor-block {
@@ -8,6 +9,8 @@
   min-height: @block-min-size;
   margin-left: -@block-handler-size;
   padding-left: @block-handler-size;
+  margin-right: -@adder-area-size;
+  padding-right: @adder-area-size;
 
   &__handler {
     position: absolute;
@@ -16,7 +19,7 @@
     display: none;
     width: @block-handler-size;
     height: @block-handler-size;
-    background: url(../images/redactor-handler.png) 0 0 no-repeat;
+    background: url(../images/redactor-handler.svg) 0 0 no-repeat;
     background-size: @block-handler-size @block-handler-size*2;
     cursor: pointer;
 
@@ -28,6 +31,7 @@
     display: block;
   }
 }
+
 
 .redactor-block-placeholder {
   outline: 2px dashed #ddd;
