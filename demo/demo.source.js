@@ -1,4 +1,4 @@
-function getBuild () {
+(function() {
   var redactor = new Redactor();
   var BaseBlock = redactor.getBaseBlock();
   var BaseBuild = redactor.getBaseBuild();
@@ -120,32 +120,88 @@ function getBuild () {
   redactor.addBlock(ListBlock);
   redactor.addBuild(PostBuild);
 
-  return redactor.load({
+  redactor.load({
     type: 'post',
     blocks: [
       {
         type: 'header',
-        content: 'Простой пример',
+        content: 'Концепция редактора',
         status: 'ACTIVE'
       },
       {
         type: 'text',
-        content: '1vmhbfd lsk hgfliehsu gilrehjs xvbdfhjxg fiw4jvbdfx;ivo htw4;iuvg dfiuhx viuth4w oi bjfspdilhbv ;twhv 1vmhbfd lsk hgfliehsu gilrehjs xvbdfhjxg fiw4jvbdfx;ivo htw4;iuvg dfiuhx viuth4w oi bjfspdilhbv ;twhv ',
+        content: 'Редактор принимает конфигурацию материала, отображает соответствующую ему форму. Материал можно напечатать, причём в разных контекстах. При конфигурировании редактора в него добавляются блоки и сборки.',
         status: 'ACTIVE'
       },
       {
         type: 'text',
-        content: '22i8y6uoeuyo8uey96yit9ruyo695uyotuboy8u6neby856 y89u6 8hu 8hut8rduh gdfh9gfdh0gfd-9h gf9 hg9h0gf22i8y6uoeuyo8uey96yit9ruyo695uyotuboy8u6neby856 y89u6 8hu 8hut8rduh gdfh9gfdh0gfd-9h gf9 hg9h0gf22i8y6uoeuyo8uey96yit9ruyo695uyotuboy8u6neby856 y89u6 8hu 8hut8rduh gdfh9gfdh0gfd-9h gf9 hg9h0gf22i8y6uoeuyo8uey96yit9ruyo695uyotuboy8u6neby856 y89u6 8hu 8hut8rduh gdfh9gfdh0gfd-9h gf9 hg9h0gf',
+        content: 'Редактор - это базовая сущность, с помощью которой можно настроить, например, шаблонный движок для печати. Редактор знает, какие блоки и сборки доступны в нём.',
         status: 'ACTIVE'
       },
       {
         type: 'text',
-        content: '333blgfjd otu reoihjdgrlkjbnfgd;ob utwi;bj n;lkgfj sbiogjrs]pob kr]powg bit[j b]gei b9-]geir b0-twi bt[kw bgkr w[brk 333blgfjd otu reoihjdgrlkjbnfgd;ob utwi;bj n;lkgfj sbiogjrs]pob kr]powg bit[j b]gei b9-]geir b0-twi bt[kw bgkr w[brk 333blgfjd otu reoihjdgrlkjbnfgd;ob utwi;bj n;lkgfj sbiogjrs]pob kr]powg bit[j b]gei b9-]geir b0-twi bt[kw bgkr w[brk 333blgfjd otu reoihjdgrlkjbnfgd;ob utwi;bj n;lkgfj sbiogjrs]pob kr]powg bit[j b]gei b9-]geir b0-twi bt[kw bgkr w[brk 333blgfjd otu reoihjdgrlkjbnfgd;ob utwi;bj n;lkgfj sbiogjrs]pob kr]powg bit[j b]gei b9-]geir b0-twi bt[kw bgkr w[brk 333blgfjd otu reoihjdgrlkjbnfgd;ob utwi;bj n;lkgfj sbiogjrs]pob kr]powg bit[j b]gei b9-]geir b0-twi bt[kw bgkr w[brk 333blgfjd otu reoihjdgrlkjbnfgd;ob utwi;bj n;lkgfj sbiogjrs]pob kr]powg bit[j b]gei b9-]geir b0-twi bt[kw bgkr w[brk 333blgfjd otu reoihjdgrlkjbnfgd;ob utwi;bj n;lkgfj sbiogjrs]pob kr]powg bit[j b]gei b9-]geir b0-twi bt[kw bgkr w[brk 333blgfjd otu reoihjdgrlkjbnfgd;ob utwi;bj n;lkgfj sbiogjrs]pob kr]powg bit[j b]gei b9-]geir b0-twi bt[kw bgkr w[brk 333blgfjd otu reoihjdgrlkjbnfgd;ob utwi;bj n;lkgfj sbiogjrs]pob kr]powg bit[j b]gei b9-]geir b0-twi bt[kw bgkr w[brk ',
+        content: 'Блок — единица данных. Имеет свою какую-то модель, которая редактируется в форме, а также имеет какое-то представление «на печати». Допустимы блоки, которые содержат в себе сборки, тем самым реализуя вложенные редакторы.',
+        status: 'ACTIVE'
+      },
+      {
+        type: 'text',
+        content: 'Сборка — последовательность блоков. Как и блок, может иметь свои данные и форму для их редактирования.',
+        status: 'ACTIVE'
+      },
+      {
+        type: 'text',
+        content: 'Сборки, как и блоки, являются классами, их можно наследовать друг от друга. Сборка знает, какие блоки допустимо использовать в ней.',
         status: 'ACTIVE'
       }
     ]
-  });
-}
+  }).attach(document.getElementById('example-entities'));
 
+  redactor.load({
+    type: 'post',
+    blocks: [
+      {
+        type: 'text',
+        content: 'Как говорилось ранее, блок может содержать в себе вложенную сборку. Для вложенных сборок можно настраивать свой набор допустимых блоков. В качестве примера предлагаю разобраться, как готовить тирамису:',
+        status: 'ACTIVE'
+      }
+    ]
+  }).attach(document.getElementById('example-inner-builds'));
 
-var build = getBuild().attach(document.getElementById('example1'));
+  redactor.load({
+    type: 'post',
+    blocks: [
+      {
+        type: 'text',
+        content: 'С помощью редактора можно описать формы редактивания необычных предметов, в основе которых лежит иерархическая структура данных',
+        status: 'ACTIVE'
+      }
+    ]
+  }).attach(document.getElementById('example-custom'));
+
+  redactor.load({
+    type: 'post',
+    blocks: [
+      {
+        type: 'text',
+        content: 'WYSIWYG’и экономят время пользователя и сокращают число ошибок. К сожалению, они малопригодны для редактировния структурированного контента. Все, что у них (и у нас) есть - это HTML, который мы можем распарсить для своих задач. Редактор пытается решить эту проблему. Вы видите то, что хотите получить, структура данных сохранена. В основе концепции редактора набор материалов из блоков. Редактор не является конечным решением, а предоставляет инструменты для декларации блоков и различных правил их поведения. Таким образом, редактор - это Фреймворк для построения над-WYSIWYG’ов.',
+        status: 'ACTIVE'
+      }
+    ]
+  }).attach(document.getElementById('example-intro'));
+
+  redactor.load({
+    type: 'post',
+    blocks: [
+      {
+        type: 'text',
+        content: 'Когда материал набран, его можно отдать в печать. С точки зрения редактора печать — это преобразование сборки в HTML. Напечатанный блок не обязательно должен выглядеть так же, как и в форме (хотя, раз это WYSIWYG, это желательно :-)). Более того, можно предусмотреть разные шаблоны в зависимости от того, как этот материал будет использоваться. Например, он может выглядеть по-разному для десктопной, мобильной версий и рсс.',
+        status: 'ACTIVE'
+      },
+      {
+        type: 'text',
+        content: 'Для этого при печати указывается контекст печати, вот так: <пример кода>',
+        status: 'ACTIVE'
+      }
+    ]
+  }).attach(document.getElementById('example-print'));
+})();
