@@ -52,7 +52,7 @@ gulp.task('stylesheet:demo', function () {
 
 gulp.task('transform:lib', function () {
   return gulp
-    .src('lib/*.js')
+    .src('lib/**/*.js')
     .pipe(react()).on('error', noop)
     .pipe(babel()).on('error', noop)
     .pipe(gulp.dest('./build'));
@@ -86,7 +86,7 @@ gulp.task('test', function () {
 // Watch
 
 gulp.task('watch', function () {
-  gulp.watch('lib/*.js', ['build', 'test']);
+  gulp.watch('lib/**/*.js', ['build', 'test']);
   gulp.watch('test/*.js', ['test']);
   gulp.watch('demo/*.js', ['transform:demo']);
   gulp.watch('demo/*.less', ['stylesheet:demo']);
